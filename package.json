@@ -1,6 +1,6 @@
 {
   "name": "vl-ui-util",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "description": "De util verzamelt verschillende handige webcomponent scripts.",
   "main": "vl-util.js",
   "author": "DIDM",
@@ -14,8 +14,8 @@
     "registry": "http://artifactory-pr-build.lb.cumuli.be:8081/artifactory/api/npm/acd-npm/"
   },
   "scripts": {
-    "copy": "npm run copy:test",
-    "copy:test": "copyfiles test/* $INIT_CWD/test",
+    "install": "npm run copy",
+    "copy": "copyfiles -f -s test/* ../../test",
     "release": "np",
     "release:testless": "np --yolo"
   },
