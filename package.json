@@ -14,8 +14,19 @@
     "registry": "http://artifactory-pr-build.lb.cumuli.be:8081/artifactory/api/npm/acd-npm/"
   },
   "scripts": {
-    "install": "npm run copy",
-    "copy": "copyfiles -f -s test/* ../../test",
+    "install": "npm run install:copy && npm run install:fonts",
+    "install:copy": "copyfiles -f -s test/* ../../test",
+    "install:fonts": "npm run install:font:path && npm run install:font:flanders-sans-light && npm run install:font:flanders-sans-regular && npm run install:font:flanders-sans-medium && npm run install:font:flanders-sans-bold && npm run install:font:flanders-serif-light && npm run install:font:flanders-serif-regular && npm run install:font:flanders-serif-medium && npm run install:font:flanders-serif-bold && npm run install:font:vlaanderen-icon",
+    "install:font:path": "replace 'https://d1l6j3bn1os9t0.cloudfront.net/3.latest/fonts/flanders/' 'https://cdn.milieuinfo.be/vlaanderen-font/LATEST/font/flandersart/' ../../style.css",
+    "install:font:flanders-sans-light": "replace 'flanders-sans-light.woff' 'FlandersArtSans-Regular.woff' ../../style.css",
+    "install:font:flanders-sans-regular": "replace 'flanders-sans-regular.woff' 'FlandersArtSans-Regular.woff' ../../style.css",
+    "install:font:flanders-sans-medium": "replace 'flanders-sans-medium.woff' 'FlandersArtSans-Medium.woff' ../../style.css",
+    "install:font:flanders-sans-bold": "replace 'flanders-sans-bold.woff' 'FlandersArtSans-Bold.woff' ../../style.css",
+    "install:font:flanders-serif-light": "replace 'flanders-serif-light.woff' 'FlandersArtSerif-Light.woff' ../../style.css",
+    "install:font:flanders-serif-regular": "replace 'flanders-serif-regular.woff' 'FlandersArtSerif-Regular.woff' ../../style.css",
+    "install:font:flanders-serif-medium": "replace 'flanders-serif-medium.woff' 'FlandersArtSerif-Medium.woff' ../../style.css",
+    "install:font:flanders-serif-bold": "replace 'flanders-serif-bold.woff' 'FlandersArtSerif-Bold.woff' ../../style.css",
+    "install:font:vlaanderen-icon": "replace '/font/vlaanderen-icon.woff' 'https://cdn.milieuinfo.be/vlaanderen-font/LATEST/font/flandersart/vlaanderen-icon.woff' ../../style.css",
     "release": "np",
     "release:testless": "np --yolo"
   },
