@@ -14,8 +14,9 @@
     "registry": "http://artifactory-pr-build.lb.cumuli.be:8081/artifactory/api/npm/acd-npm/"
   },
   "scripts": {
-    "install": "npm run install:copy && npm run install:fonts",
+    "install": "npm run install:copy && npm run install:sass && npm run install:fonts",
     "install:copy": "copyfiles -f -s test/* ../../test",
+    "install:sass": "sass style.scss style.css --load-path node_modules/@govflanders",
     "install:fonts": "npm run install:font:path && npm run install:font:flanders-sans-light && npm run install:font:flanders-sans-regular && npm run install:font:flanders-sans-medium && npm run install:font:flanders-sans-bold && npm run install:font:flanders-serif-light && npm run install:font:flanders-serif-regular && npm run install:font:flanders-serif-medium && npm run install:font:flanders-serif-bold && npm run install:font:vlaanderen-icon",
     "install:font:path": "replace 'https://d1l6j3bn1os9t0.cloudfront.net/3.latest/fonts/flanders/' 'https://cdn.milieuinfo.be/vlaanderen-font/LATEST/font/flandersart/' ../../style.css",
     "install:font:flanders-sans-light": "replace 'flanders-sans-light.woff' 'FlandersArtSans-Regular.woff' ../../style.css",
