@@ -1,6 +1,6 @@
 {
   "name": "vl-ui-util",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "De util verzamelt verschillende handige webcomponent scripts.",
   "main": "vl-util.js",
   "author": "DIDM",
@@ -10,8 +10,8 @@
     "url": "git+https://github.com/milieuinfo/webcomponent-vl-ui-util.git"
   },
   "homepage": "https://github.com/milieuinfo/webcomponent-vl-ui-util#readme",
-  "publishConfig": {	
-     "registry": "http://artifactory-pr-build.lb.cumuli.be:8081/artifactory/api/npm/acd-npm/"	
+  "publishConfig": {
+    "registry": "http://artifactory-pr-build.lb.cumuli.be:8081/artifactory/api/npm/acd-npm/"
   },
   "scripts": {
     "util": "npm run install:copy && npm run install:sass && npm run install:fonts",
