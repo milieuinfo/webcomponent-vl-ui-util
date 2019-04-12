@@ -38,9 +38,11 @@
     "release": "np",
     "release:testless": "np --yolo"
   },
+  "dependencies": {
+    "prismjs": "1.16.0"
+  },
   "devDependencies": {
     "copyfiles": "2.1.0",
-    "np": "3.0.4",
-    "prismjs": "1.16.0"
+    "np": "3.0.4"
   }
 }
