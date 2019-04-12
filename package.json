@@ -18,7 +18,7 @@
     "install:sass": "npm run install:sass:webcomponent && npm run install:sass:demo",
     "install:sass:webcomponent": "sass ../../style.scss ../../style.css --load-path ../../node_modules/@govflanders",
     "install:sass:demo": "sass demo.scss ../../demo/demo.css --load-path ../../node_modules/@govflanders",
-    "install:copy": "npm run install:copy:install && npm run install:copy:test && install:copy:demo:js && install:copy:demo:css && install:copy:prismjs",
+    "install:copy": "npm run install:copy:install && npm run install:copy:test && npm run install:copy:demo:js && npm run install:copy:demo:css && npm run install:copy:prismjs",
     "install:copy:install": "npm i copyfiles@2.1.0 --save",
     "install:copy:test": "copyfiles -f -s test/* ../../test",
     "install:copy:demo:js": "copyfiles -f -s demo.js ../../demo",
