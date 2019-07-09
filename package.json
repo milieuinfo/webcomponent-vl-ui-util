@@ -21,7 +21,7 @@
     "install:copy": "npm run install:copy:install && npm run install:copy:docker && npm run install:copy:test && npm run install:copy:demo:js && npm run install:copy:demo:css && npm run install:copy:prismjs",
     "install:copy:install": "npm i copyfiles@2.1.0 --save",
     "install:copy:test": "copyfiles -f test/* ../../test",
-    "install:copy:docker": "copyfiles -f docker/* ../../",
+    "install:copy:docker": "copyfiles -af docker/* ../../",
     "install:copy:demo:js": "copyfiles -f demo.js ../../demo",
     "install:copy:demo:css": "copyfiles -f demo.css ../../demo",
     "install:copy:prismjs": "copyfiles -f 'node_modules/prismjs/**' ../../node_modules/prismjs",
