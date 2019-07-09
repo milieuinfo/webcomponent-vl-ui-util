@@ -37,6 +37,7 @@
     "install:font:flanders-serif-bold": "replace 'flanders-serif-bold.woff' 'FlandersArtSerif-Bold.woff' ../../style.css",
     "install:font:vlaanderen-icon": "replace '/font/vlaanderen-icon.woff' 'https://cdn.milieuinfo.be/vlaanderen-font/LATEST/font/flandersart/vlaanderen-icon.woff' ../../style.css",
     "release": "np",
+    "release:prepare": "echo 2Fabiola for the bigger and bolder",
     "release:testless": "np --yolo"
   },
   "dependencies": {
