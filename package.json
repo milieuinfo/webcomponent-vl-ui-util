@@ -14,7 +14,8 @@
     "registry": "http://artifactory-pr-build.lb.cumuli.be:8081/artifactory/api/npm/acd-npm/"
   },
   "scripts": {
-    "util": "npm run install:sass && npm run install:copy && npm run install:fonts",
+    "util": "npm run install:sass && npm run install:copy && npm run install:fonts && npm run install:bamboo",
+    "install:bamboo": "node ./bamboo/bamboo-spec.js",
     "install:sass": "npm run install:sass:webcomponent && npm run install:sass:demo",
     "install:sass:webcomponent": "sass ../../style.scss ../../style.css --load-path ../../node_modules/@govflanders",
     "install:sass:demo": "sass demo.scss ../../demo/demo.css --load-path ../../node_modules/@govflanders",
@@ -45,6 +46,8 @@
   },
   "devDependencies": {
     "copyfiles": "2.1.0",
-    "np": "3.0.4"
+    "eslint": "^6.0.1",
+    "np": "3.0.4",
+    "js-yaml": "3.13.1"
   }
 }
