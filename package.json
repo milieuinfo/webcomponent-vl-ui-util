@@ -42,12 +42,12 @@
     "release:testless": "np --yolo"
   },
   "dependencies": {
-    "prismjs": "1.16.0"
+    "prismjs": "1.16.0",
+    "js-yaml": "3.13.1"
   },
   "devDependencies": {
     "copyfiles": "2.1.0",
     "eslint": "^6.0.1",
-    "np": "3.0.4",
-    "js-yaml": "3.13.1"
+    "np": "3.0.4"
   }
 }
