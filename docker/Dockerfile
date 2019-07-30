@@ -23,7 +23,7 @@ WORKDIR /home/node/app
 # natuurlijk als je met docker werkt zal dat niet werken want die heeft 
 # zijn eigen etc hosts dus als je het wil laten werken moet je die zelf aanmaken
 
-RUN echo 'repository.milieuinfo.be 10.48.0.203' >> /etc/hosts
+RUN echo 'repository.milieuinfo.be 10.48.0.203' >> /etc/hosts \
     && npm install \
     && npm run release:prepare \
     && npm run release:testless -- ${VERSION}
