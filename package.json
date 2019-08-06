@@ -14,7 +14,7 @@
     "registry": "http://artifactory-pr-build.lb.cumuli.be:8081/artifactory/api/npm/acd-npm/"
   },
   "scripts": {
-    "util": "npm run install:sass && npm run install:copy && npm run install:fonts && npm run install:bamboo",
+    "util": "npm run install:sass && npm run install:copy && npm run install:fonts && npm run install:bamboo && npm run install:copy:release-drafter",
     "install:bamboo": "node ./bamboo/bamboo-spec.js",
     "install:sass": "npm run install:sass:webcomponent && npm run install:sass:demo",
     "install:sass:webcomponent": "sass ../../style.scss ../../style.css --load-path ../../node_modules/@govflanders",
@@ -24,6 +24,7 @@
     "install:copy:test": "copyfiles -f test/* ../../test",
     "install:copy:dependabot": "copyfiles -a .dependabot/config.yml ../../",
     "install:copy:demo:js": "copyfiles -f demo.js ../../demo",
+    "install:copy:release-drafter": "copyfiles -a .github/release-drafter.yml ../../",
     "install:copy:demo:css": "copyfiles -f demo.css ../../demo",
     "install:copy:prismjs": "copyfiles -f 'node_modules/prismjs/**' ../../node_modules/prismjs",
     "install:fonts": "npm run install:font:path && npm run install:font:flanders-sans-light && npm run install:font:flanders-sans-regular && npm run install:font:flanders-sans-medium && npm run install:font:flanders-sans-bold && npm run install:font:flanders-serif-light && npm run install:font:flanders-serif-regular && npm run install:font:flanders-serif-medium && npm run install:font:flanders-serif-bold && npm run install:font:vlaanderen-icon",
