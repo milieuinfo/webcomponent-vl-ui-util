@@ -20,11 +20,11 @@ function getPlanKey() {
 function parseTemplate(file) {
     console.log(__dirname)
     console.log(process.cwd())
-    const file = fs.readFileSync(file, 'utf8', (err) => {
+    const doc = fs.readFileSync(file, 'utf8', (err) => {
         if (err) throw err;
-        console.debug('Parsing ' + file + ' ...');
+        console.debug('Parsing ' + doc + ' ...');
     });
-    return yaml.parseDocument(file);
+    return yaml.parseDocument(doc);
 }
 
 function getSpec() {
