@@ -10,6 +10,7 @@ function writeYaml(input, output) {
 };
 
 function getPackageName() {
+    console.log(package)
     return JSON.parse(package).name
 }
 
