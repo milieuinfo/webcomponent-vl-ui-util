@@ -1,41 +1,23 @@
-const yaml = require('js-yaml')
-const fs = require('fs');
-const package = require('../../../package.json');
-const options = { lineWidth: 200 }
+const yaml = require('yaml');
+const utils = require('./utils/util');
 
-const key = "WEBCOM"
-const planName = package.name
-const planKey = package.name.replace(/-/g, '').toUpperCase();
+const planProjectKey = 'WEBCOM';
+const packageName = utils.getPackageName();
+const planKey = utils.getPlanKey();
+const planName = 'webcomponent-' + packageName;
 
-const content = {
-    "project":
-    {
-        "key": key,
-        "plan":
-        {
-            "name": planName,
-            "key": planKey
-        }
-    },
-    "stages": [{
-        "jobs": [{
-            "scripts": [
-                "/opt/scripts/git/git-repository-information-restore.sh",
-                "cp ${bamboo.gitconfig_path} ${bamboo.build.working.directory}",
-                "cp ${bamboo.npmrc_path} ${bamboo.build.working.directory}",
-                "cp ${bamboo.gitcredentials_path} ${bamboo.build.working.directory}",
-                "docker build --build-arg VERSION=patch --build-arg REPO=${bamboo.planRepository.repositoryUrl} --no-cache .",
-                "/opt/scripts/docker/stop-docker-containers.sh"
-            ], "requirements": ["REMOTE_ONLY"]
-        }]
-    }]
-}
+const spec = utils.getSpec();
+const permissions = utils.getPermissions();
+const plan = spec.get('plan');
+const job = spec.get('Build docker');
 
-const yamlFile = yaml.safeDump(content, options);
+plan.set('project-key', planProjectKey);
+plan.set('key', planKey);
+plan.set('name', planName);
 
-fs.mkdir('../../bamboo-specs', { recursive: true }, (err) => {
-    if (err) throw err;
-    fs.writeFile('../../bamboo-specs/bamboo.yml', yamlFile, 'utf8', (err) => {
-        if (err) throw err;
-    });
-});
+job.set('key', planProjectKey);
+
+permissions.get('plan').set('key', planKey);
+
+utils.writeYaml(yaml.stringify(spec), '../../bamboo-specs/bamboo.yml');
+utils.writeYaml(yaml.stringify(permissions), '../../bamboo-specs/permissions.yml');

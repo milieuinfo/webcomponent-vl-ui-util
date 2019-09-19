@@ -1,0 +1,31 @@
+---
+version: 2
+plan:
+  project-key: PCAM
+  key: PCABAM
+  name: Bamboo spec
+
+triggers:
+  - polling: 130
+
+variables:
+  release_version: patch
+
+stages:
+  - Build:
+      manual: false
+      jobs:
+        - Build docker
+
+Build docker:
+  key: PCAM
+  tasks:
+    - clean
+    - script:
+        scripts:
+          - /opt/scripts/git/git-repository-information-restore.sh
+          - 'docker run -e GIT_REPO=${bamboo_repository_git_repositoryUrl} -e RELEASE_VERSION=${bamboo.release_version} acd-docker.repository.milieuinfo.be/milieuinfo/wc-release:1.0.0'
+          - /opt/scripts/docker/stop-docker-containers.sh
+  requirements:
+    - REMOTE_ONLY
+
