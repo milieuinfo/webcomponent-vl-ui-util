@@ -26,11 +26,11 @@ function parseTemplate(fileName) {
 }
 
 function getSpec() {
-    return parseTemplate('./templates/spec-template.yml').contents;
+    return parseTemplate('./utils/templates/spec-template.yml').contents;
 }
 
 function getPermissions() {
-    return parseTemplate('./templates/permissions-template.yml').contents;
+    return parseTemplate('./utils/templates/permissions-template.yml').contents;
 }
 
 module.exports = { writeYaml, getPackageName, getPlanKey, getSpec, getPermissions }
