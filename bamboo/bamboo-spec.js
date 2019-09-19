@@ -5,9 +5,7 @@ const YamlSeq = require('yaml')(YamlSeq);
 
 const planProjectKey = 'WEBCO';
 const packageName = utils.getPackageName();
-const packageName = 'vl-ui-checkbox';
 const planKey = utils.getPlanKey();
-const planKey = 'ABC';
 const planName = 'webcomponent-' + packageName;
 
 const spec = utils.getSpec();
