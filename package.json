@@ -1,6 +1,6 @@
 {
   "name": "vl-ui-util",
-  "version": "1.2.15",
+  "version": "1.2.23",
   "description": "De util verzamelt verschillende handige webcomponent scripts.",
   "main": "vl-util.js",
   "author": "DIDM",
@@ -14,18 +14,17 @@
     "registry": "http://artifactory-pr-build.lb.cumuli.be:8081/artifactory/api/npm/acd-npm/"
   },
   "scripts": {
-    "util": "npm run install:sass && npm run install:copy && npm run install:fonts && npm run install:bamboo && npm run install:copy:release-drafter",
+    "util": "npm run install:sass && npm run install:copy && npm run install:fonts && npm run install:bamboo && npm run install:copy:github",
     "install:bamboo": "node ./bamboo/bamboo-spec.js",
     "install:sass": "npm run install:sass:webcomponent && npm run install:sass:demo",
     "install:sass:webcomponent": "sass ../../style.scss ../../style.css --load-path ../../node_modules/@govflanders",
     "install:sass:demo": "sass demo.scss ../../demo/demo.css --load-path ../../node_modules/@govflanders",
-    "install:copy": "npm run install:copy:install && npm run install:copy:test && npm run install:copy:demo:js && npm run install:copy:demo:css && npm run install:copy:prismjs && npm run install:copy:dependabot && npm run install:copy:codeowner",
+    "install:copy": "npm run install:copy:install && npm run install:copy:test && npm run install:copy:demo:js && npm run install:copy:demo:css && npm run install:copy:prismjs && npm run install:copy:codeowner && npm run install:copy:github",
     "install:copy:install": "npm i copyfiles@2.1.0 --save",
     "install:copy:test": "copyfiles -f test/* ../../test",
-    "install:copy:dependabot": "copyfiles -a .dependabot/config.yml ../../",
     "install:copy:demo:js": "copyfiles -f demo.js ../../demo",
     "install:copy:codeowner": "copyfiles CODEOWNERS ../../",
-    "install:copy:release-drafter": "copyfiles -a .github/release-drafter.yml ../../",
+    "install:copy:github": "cp -R .github ../../",
     "install:copy:demo:css": "copyfiles -f demo.css ../../demo",
     "install:copy:prismjs": "copyfiles -f 'node_modules/prismjs/**' ../../node_modules/prismjs",
     "install:fonts": "npm run install:font:path && npm run install:font:flanders-sans-light && npm run install:font:flanders-sans-regular && npm run install:font:flanders-sans-medium && npm run install:font:flanders-sans-bold && npm run install:font:flanders-serif-light && npm run install:font:flanders-serif-regular && npm run install:font:flanders-serif-medium && npm run install:font:flanders-serif-bold && npm run install:font:vlaanderen-icon",
@@ -44,11 +43,11 @@
     "release:testless": "np --yolo"
   },
   "dependencies": {
-    "prismjs": "1.16.0",
+    "prismjs": "1.17.1",
     "js-yaml": "3.13.1"
   },
   "devDependencies": {
-    "copyfiles": "2.1.0",
+    "copyfiles": "2.1.1",
     "eslint": "^6.0.1",
     "np": "3.1.0"
   }
