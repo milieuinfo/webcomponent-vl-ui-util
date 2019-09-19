@@ -17,10 +17,12 @@ function getPlanKey() {
     return getPackageName().split('-').join('').toLocaleUpperCase();
 }
 
-function parseTemplate(fileName) {
-    const file = fs.readFileSync(fileName, 'utf8', (err) => {
+function parseTemplate(file) {
+    console.log(__dirname)
+    console.log(process.cwd())
+    const file = fs.readFileSync(file, 'utf8', (err) => {
         if (err) throw err;
-        console.debug('Parsing ' + fileName + ' ...');
+        console.debug('Parsing ' + file + ' ...');
     });
     return yaml.parseDocument(file);
 }
