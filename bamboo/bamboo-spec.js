@@ -1,5 +1,5 @@
 const YAML = require('yaml');
-const Document = YAML.Document;
+const YAMLSeq = reuire('yaml/types').YAMLSeq
 const utils = require('./utils/util');
 
 const planProjectKey = 'WEBCO';
@@ -20,8 +20,8 @@ permissions.get('plan').set('key', planKey);
 const specNode = YAML.createNode(spec);
 const permissionNode = YAML.createNode(permissions);
 
-const doc = new Document();
-doc.contents = new YAML.YAMLSeq();
+const doc = new YAML.Document();
+doc.contents = new YAMLSeq();
 
 doc.contents.items = [ specNode, permissionNode ]
 
