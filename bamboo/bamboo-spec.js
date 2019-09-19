@@ -1,4 +1,5 @@
-const YAML = require('yaml')
+const YAML = require('yaml');
+const Document = YAML.Document;
 const utils = require('./utils/util');
 
 const planProjectKey = 'WEBCO';
@@ -18,8 +19,10 @@ permissions.get('plan').set('key', planKey);
 
 const specNode = YAML.createNode(spec);
 const permissionNode = YAML.createNode(permissions);
-const doc = new YAML.Document();
+
+const doc = new Document();
 doc.contents = new YAML.YAMLSeq();
+
 doc.contents.items = [ specNode, permissionNode ]
 
 utils.writeYaml(YAML.stringify(doc), '../../bamboo-specs/out.yml');
