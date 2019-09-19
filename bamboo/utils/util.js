@@ -1,6 +1,7 @@
 const fs = require('fs');
 const yaml = require('yaml');
 const package = require('../../../../package.json');
+const path = require('path');
 
 function writeYaml(input, output) {
     fs.writeFileSync(output, input, (err) => {
