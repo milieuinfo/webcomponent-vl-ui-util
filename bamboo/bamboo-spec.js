@@ -9,13 +9,10 @@ const planName = 'webcomponent-' + packageName;
 const spec = utils.getSpec();
 const permissions = utils.getPermissions();
 const plan = spec.get('plan');
-const job = spec.get('Build docker');
 
 plan.set('project-key', planProjectKey);
 plan.set('key', planKey);
 plan.set('name', planName);
-
-job.set('key', planProjectKey);
 
 permissions.get('plan').set('key', planKey);
 
