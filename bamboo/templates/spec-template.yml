@@ -1,8 +1,8 @@
 ---
 version: 2
 plan:
-  project-key: PCAM
-  key: PCABAM
+  project-key: WEBCO
+  key: abc
   name: Bamboo spec
 
 triggers:
@@ -12,13 +12,24 @@ variables:
   release_version: patch
 
 stages:
-  - Build:
-      manual: false
+  - Release:
+      manual: true
       jobs:
-        - Build docker
+        - Release
 
-Build docker:
+Build:
   key: BD
+  tasks:
+    - clean
+    - script:
+        scripts:
+          - 'docker-compose -f test/docker-compose.yml up --exit-code-from tests'
+          - /opt/scripts/docker/stop-docker-containers.sh
+  requirements:
+    - REMOTE_ONLY
+    
+Release:
+  key: REL
   tasks:
     - clean
     - script:

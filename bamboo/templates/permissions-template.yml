@@ -1,7 +1,7 @@
 ---
 version: 2
 plan:
-  key: PCABAM
+  key: abc
   
 plan-permissions:
   - groups:
