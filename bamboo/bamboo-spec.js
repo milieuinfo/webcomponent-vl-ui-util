@@ -1,5 +1,5 @@
 const YAML = require('yaml');
-const YAMLSeq = reuire('yaml/types').YAMLSeq
+const YAMLSeq = require('yaml/types').YAMLSeq
 const utils = require('./utils/util');
 
 const planProjectKey = 'WEBCO';
