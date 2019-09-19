@@ -12,6 +12,9 @@ variables:
   release_version: patch
 
 stages:
+  - Build:
+      jobs:
+        - Build
   - Release:
       manual: true
       jobs:
@@ -27,7 +30,7 @@ Build:
           - /opt/scripts/docker/stop-docker-containers.sh
   requirements:
     - REMOTE_ONLY
-    
+
 Release:
   key: REL
   tasks:
