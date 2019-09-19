@@ -1,8 +1,4 @@
-require("babel-core").transform("code", options);
-import YAML from 'yaml';
-import { YAMLSeq, Document } from 'yaml/types';
-
-const yaml = require('yaml');
+const YAML = require('yaml')
 const utils = require('./utils/util');
 
 const planProjectKey = 'WEBCO';
@@ -22,8 +18,8 @@ permissions.get('plan').set('key', planKey);
 
 const specNode = yaml.createNode(spec);
 const permissionNode = yaml.createNode(permissions);
-const doc = new Document();
-doc.contents = new YAMLSeq();
+const doc = new YAML.Document();
+doc.contents = new YAML.YAMLSeq();
 doc.contents.items = [ specNode, permissionNode ]
 
 utils.writeYaml(YAML.stringify(doc), '../../bamboo-specs/out.yml');

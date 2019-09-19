@@ -15,7 +15,7 @@
   },
   "scripts": {
     "util": "npm run install:sass && npm run install:copy && npm run install:fonts && npm run install:bamboo && npm run install:copy:github",
-    "install:bamboo": "babel-node ./bamboo/bamboo-spec.js",
+    "install:bamboo": "node ./bamboo/bamboo-spec.js",
     "install:sass": "npm run install:sass:webcomponent && npm run install:sass:demo",
     "install:sass:webcomponent": "sass ../../style.scss ../../style.css --load-path ../../node_modules/@govflanders",
     "install:sass:demo": "sass demo.scss ../../demo/demo.css --load-path ../../node_modules/@govflanders",
@@ -47,9 +47,6 @@
     "yaml": "1.6.0"
   },
   "devDependencies": {
-    "@babel/node": "7.6.1",
-    "@babel/preset-env": "7.6.0",
-    "babel-core": "6.26.3",
     "copyfiles": "2.1.1",
     "eslint": "^6.0.1",
     "np": "3.0.4"
