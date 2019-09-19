@@ -16,8 +16,8 @@ plan.set('name', planName);
 
 permissions.get('plan').set('key', planKey);
 
-const specNode = yaml.createNode(spec);
-const permissionNode = yaml.createNode(permissions);
+const specNode = YAML.createNode(spec);
+const permissionNode = YAML.createNode(permissions);
 const doc = new YAML.Document();
 doc.contents = new YAML.YAMLSeq();
 doc.contents.items = [ specNode, permissionNode ]
