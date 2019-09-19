@@ -10,13 +10,7 @@ function writeYaml(input, output) {
 };
 
 function getPackageName() {
-    let json = null;
-    try {
-        json = JSON.parse(package);
-    } catch (e) {
-        throw e;
-    }
-    return json.name;
+    return package.name;
 }
 
 function getPlanKey() {
