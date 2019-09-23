@@ -27,11 +27,7 @@ function parseTemplate(file) {
 }
 
 function getSpec() {
-    return parseTemplate(path.join(__dirname, '/../templates/spec-template.yml')).contents;
-}
-
-function getPermissions() {
-    return parseTemplate(path.join(__dirname, '/../templates/permissions-template.yml')).contents;
+    return parseTemplate(path.join(__dirname, '/templates/spec-template.yml')).contents;
 }
 
 function mergeDocuments(docs) {
@@ -42,4 +38,4 @@ function readTemplate() {
     return fs.readFileSync(path.join(__dirname, 'templates/template.yml'), { encoding: 'utf8'});
 }
 
-module.exports = { writeYaml, getPackageName, getPlanKey, getSpec, getPermissions, mergeDocuments, readTemplate }
+module.exports = { writeYaml, getPackageName, getPlanKey, getSpec, mergeDocuments, readTemplate }
