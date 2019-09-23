@@ -1,41 +1,22 @@
-const yaml = require('js-yaml')
-const fs = require('fs');
-const package = require('../../../package.json');
-const options = { lineWidth: 200 }
+const yaml = require('yaml');
+const utils = require('./utils/util');
+const path = require('path');
 
-const key = "WEBCOM"
-const planName = package.name
-const planKey = package.name.replace(/-/g, '').toUpperCase();
+const packageName = utils.getPackageName();
+const planKey = utils.getPlanKey();
+const planName = 'webcomponent-' + packageName;
 
-const content = {
-    "project":
-    {
-        "key": key,
-        "plan":
-        {
-            "name": planName,
-            "key": planKey
-        }
-    },
-    "stages": [{
-        "jobs": [{
-            "scripts": [
-                "/opt/scripts/git/git-repository-information-restore.sh",
-                "cp ${bamboo.gitconfig_path} ${bamboo.build.working.directory}",
-                "cp ${bamboo.npmrc_path} ${bamboo.build.working.directory}",
-                "cp ${bamboo.gitcredentials_path} ${bamboo.build.working.directory}",
-                "docker build --build-arg VERSION=patch --build-arg REPO=${bamboo.planRepository.repositoryUrl} --no-cache .",
-                "/opt/scripts/docker/stop-docker-containers.sh"
-            ], "requirements": ["REMOTE_ONLY"]
-        }]
-    }]
-}
+const file = utils.readTemplate();
+const doc = yaml.parseAllDocuments(file);
 
-const yamlFile = yaml.safeDump(content, options);
+const spec = doc[0];
+const permissions = doc[1];
+const specPlan = spec.get('plan');
+const permissionPlan = permissions.get('plan')
 
-fs.mkdir('../../bamboo-specs', { recursive: true }, (err) => {
-    if (err) throw err;
-    fs.writeFile('../../bamboo-specs/bamboo.yml', yamlFile, 'utf8', (err) => {
-        if (err) throw err;
-    });
-});
+specPlan.set('key', planKey);
+specPlan.set('name', planName);
+permissionPlan.set('key', planKey);
+
+let result = utils.mergeDocuments(doc);
+utils.writeYaml(result, path.join(__dirname, '../../../bamboo-specs/bamboo.yml'));
