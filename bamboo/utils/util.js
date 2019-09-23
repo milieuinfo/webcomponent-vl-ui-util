@@ -27,7 +27,7 @@ function parseTemplate(file) {
 }
 
 function getSpec() {
-    return parseTemplate(path.join(__dirname, '/templates/spec-template.yml')).contents;
+    return parseTemplate(path.join(__dirname, '/../templates/spec-template.yml')).contents;
 }
 
 function mergeDocuments(docs) {
@@ -35,7 +35,7 @@ function mergeDocuments(docs) {
 }
 
 function readTemplate() {
-    return fs.readFileSync(path.join(__dirname, 'templates/template.yml'), { encoding: 'utf8'});
+    return fs.readFileSync(path.join(__dirname, '/../templates/template.yml'), { encoding: 'utf8'});
 }
 
 module.exports = { writeYaml, getPackageName, getPlanKey, getSpec, mergeDocuments, readTemplate }
