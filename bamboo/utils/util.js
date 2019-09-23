@@ -4,6 +4,10 @@ const package = require('../../../../package.json');
 const path = require('path');
 
 function writeYaml(input, output) {
+    if(!fs.existsSync('../../../bamboo-specs')) {
+        fs.mkdirSync('../../../bamboo-specs');
+    }
+    
     fs.writeFileSync(output, input, (err) => {
         if (err) throw err;
         console.log('YAML has been saved to ' + output);

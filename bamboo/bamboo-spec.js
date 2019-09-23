@@ -19,4 +19,4 @@ specPlan.set('name', planName);
 permissionPlan.set('key', planKey);
 
 let result = utils.mergeDocuments(doc);
-utils.writeYaml(result, path.join(__dirname, '../../../bamboo/bamboo.yml'));
+utils.writeYaml(result, path.join(__dirname, '../../../bamboo-specs/bamboo.yml'));
