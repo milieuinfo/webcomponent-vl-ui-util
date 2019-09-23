@@ -1,30 +1,22 @@
-const YAML = require('yaml');
-const YAMLSeq = require('yaml/types').YAMLSeq
+const yaml = require('yaml');
 const utils = require('./utils/util');
+const path = require('path');
 
-const planProjectKey = 'WEBCO';
 const packageName = utils.getPackageName();
 const planKey = utils.getPlanKey();
 const planName = 'webcomponent-' + packageName;
 
-const spec = utils.getSpec();
-const permissions = utils.getPermissions();
-const plan = spec.get('plan');
+const file = utils.readTemplate();
+const doc = yaml.parseAllDocuments(file);
 
-plan.set('project-key', planProjectKey);
-plan.set('key', planKey);
-plan.set('name', planName);
+const spec = doc[0];
+const permissions = doc[1];
+const specPlan = spec.get('plan');
+const permissionPlan = permissions.get('plan')
 
-permissions.get('plan').set('key', planKey);
+specPlan.set('key', planKey);
+specPlan.set('name', planName);
+permissionPlan.set('key', planKey);
 
-const specNode = YAML.createNode(spec);
-const permissionNode = YAML.createNode(permissions);
-
-const doc = new YAML.Document();
-doc.contents = new YAMLSeq();
-
-doc.contents.items = [ specNode, permissionNode ]
-
-utils.writeYaml(YAML.stringify(doc), '../../bamboo-specs/out.yml');
-utils.writeYaml(YAML.stringify(spec), '../../bamboo-specs/bamboo.yml');
-utils.writeYaml(YAML.stringify(permissions), '../../bamboo-specs/permissions.yml');
+let result = utils.mergeDocuments(doc);
+utils.writeYaml(result, path.join(__dirname, '../../../bamboo/bamboo.yml'));

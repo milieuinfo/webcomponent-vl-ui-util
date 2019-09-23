@@ -34,4 +34,12 @@ function getPermissions() {
     return parseTemplate(path.join(__dirname, '/../templates/permissions-template.yml')).contents;
 }
 
-module.exports = { writeYaml, getPackageName, getPlanKey, getSpec, getPermissions }
+function mergeDocuments(docs) {
+    return docs.map(d => String(d)).join('\n');
+}
+
+function readTemplate() {
+    return fs.readFileSync(path.join(__dirname, 'templates/template.yml'), { encoding: 'utf8'});
+}
+
+module.exports = { writeYaml, getPackageName, getPlanKey, getSpec, getPermissions, mergeDocuments, readTemplate }
