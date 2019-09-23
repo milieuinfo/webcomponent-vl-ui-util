@@ -44,11 +44,11 @@
   },
   "dependencies": {
     "prismjs": "1.17.1",
-    "js-yaml": "3.13.1"
+    "yaml": "1.6.0"
   },
   "devDependencies": {
     "copyfiles": "2.1.1",
-    "eslint": "^6.0.1",
+    "eslint": "6.0.1",
     "np": "3.0.4"
   }
 }
