@@ -15,6 +15,7 @@
   },
   "scripts": {
     "util": "npm run install:sass && npm run install:copy && npm run install:fonts && npm run install:bamboo && npm run install:copy:github",
+    "install:utils": "npm run install:bamboo && npm run install:copy:install && npm run install:copy:codeowner && npm run install:copy:github",
     "install:bamboo": "node ./bamboo/bamboo-spec.js",
     "install:sass": "npm run install:sass:webcomponent && npm run install:sass:demo",
     "install:sass:webcomponent": "sass ../../style.scss ../../style.css --load-path ../../node_modules/@govflanders",
