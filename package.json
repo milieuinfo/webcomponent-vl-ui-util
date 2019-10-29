@@ -36,7 +36,7 @@
     "release": "np",
     "release:prepare": "echo 2Fabiola for the bigger and bolder",
     "release:testless": "np --yolo",
-    "update:readme": "./scripts/updateReadme.sh"
+    "update:readme": ". ./scripts/updateReadme.sh"
   },
   "dependencies": {
     "prismjs": "1.17.1",
