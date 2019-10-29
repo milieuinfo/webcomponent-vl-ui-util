@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+CWD=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+
 installJqDependency() {
     which -s jq
     if [[ $? != 0 ]] ; then
@@ -25,7 +27,7 @@ getDemoName() {
 }
 
 copyTemplate() { 
-    cp node_modules/vl-ui-util/templates/README.md.template README.md.template
+    cp ${CWD}/node_modules/vl-ui-util/templates/README.md.template README.md.template
 }
 
 installJqDependency
@@ -36,8 +38,8 @@ componentFullName=$(cat ../../package.json | jq '.name') #vl-ui-template
 apiName=$(getApiName ${componentFullName})
 demoName=$(getDemoName ${componentFullName})
 
-sed -i "" -e "s/@description@/${description}/g" README.md.template
-sed -i "" -e "s/@fullName@/${componentFullName}/g" README.md.template
-sed -i "" -e "s/@apiName@/${apiName}/g" README.md.template
-sed -i "" -e "s/@demoName@/${demoName}/g" README.md.template
+sed -i "" -e "s/@description@/${description}/g" ${CWD}/README.md.template
+sed -i "" -e "s/@fullName@/${componentFullName}/g" ${CWD}/README.md.template
+sed -i "" -e "s/@apiName@/${apiName}/g" ${CWD}/README.md.template
+sed -i "" -e "s/@demoName@/${demoName}/g" ${CWD}/README.md.template
 
