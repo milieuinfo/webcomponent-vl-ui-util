@@ -8,8 +8,8 @@ prepareEnvironment() {
     fi
 }
 
-cp ../templates/README.md.template ../../../README.md.template
-description=$(cat ../../../package.json | jq '.description')
+cp ../../templates/README.md.template README.md.template
+description=$(cat ../../package.json | jq '.description')
 echo ${description}
 
 #replaceDescription() {
