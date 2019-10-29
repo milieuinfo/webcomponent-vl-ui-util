@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-prepareEnvironment() {
+installJqDependency() {
     which -s jq
     if [[ $? != 0 ]] ; then
         echo "Jq is not installed, please hang on while we install it for you ..."
@@ -8,12 +8,36 @@ prepareEnvironment() {
     fi
 }
 
-cp ../../templates/README.md.template README.md.template
-description=$(cat ../../package.json | jq '.description')
-echo ${description}
+getApiName() {
+    IFS='-' # hyphen (-) is set as delimiter
+        read -ra ADDR <<< "$1" # str is read into an array as tokens separated by IFS
+        for i in "${ADDR[@]}"; do # access each element of array
+            apiName+=${i^} #set first letter to uppercase
+        done
+    IFS=' '
+    echo ${apiName}
+}
 
-#replaceDescription() {
-#    sed -i "" -e "s/@description@/${description}/g" $fullPath/README.md.template
-#    touch $fullPath/package.new.json
-#    cat package.json | jq --arg desc "${description}" '.description = $desc' > $fullPath/package.new.json
-#}
+getDemoName() {
+    vl=$(echo ${1} | cut -c1-2)
+    template=$(echo ${1} | cut -c7-)
+    echo ${vl}-${template}
+}
+
+copyTemplate() { 
+    cp node_modules/vl-ui-util/templates/README.md.template README.md.template
+}
+
+installJqDependency
+copyTemplate
+
+description=$(cat ../../package.json | jq '.description')
+componentFullName=$(cat ../../package.json | jq '.name') #vl-ui-template
+apiName=$(getApiName ${componentFullName})
+demoName=$(getDemoName ${componentFullName})
+
+sed -i "" -e "s/@description@/${description}/g" README.md.template
+sed -i "" -e "s/@fullName@/${componentFullName}/g" README.md.template
+sed -i "" -e "s/@apiName@/${apiName}/g" README.md.template
+sed -i "" -e "s/@demoName@/${demoName}/g" README.md.template
+
