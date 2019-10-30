@@ -7,7 +7,6 @@ set -e
 #################################################################################################
 
 CWD=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
-echo ${CWD}
 
 installJqDependency() {
     which -s jq
@@ -58,5 +57,5 @@ sed -i "" -e "s/@apiName@/${apiName}/g" README.md.template
 sed -i "" -e "s/@demoName@/${demoName}/g" README.md.template
 
 # Clean up after ourselves
-rm -rfv README.md
-mv -fv README.md.template ${CWD}/README.new.md
+rm -rf README.md
+mv -fv README.md.template ../../../README.new.md
