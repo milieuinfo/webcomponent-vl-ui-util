@@ -20,15 +20,15 @@ getApiName() {
     IFS='-' # hyphen (-) is set as delimiter
         read -ra array <<< "$1" # str is read into an array as tokens separated by IFS
         for i in "${array[@]}"; do # access each element of array
-            output+=${i^} #set first letter to uppercase
+            output+=${i^} # set first letter to uppercase
         done
     IFS=' '
-    echo ${output}
+    echo "${output//Ui}" # strip Ui from string
 }
 
 getDemoName() {
-    vl=$(echo ${1} | cut -c1-2)
-    template=$(echo ${1} | cut -c7-)
+    vl=$(echo ${1} | cut -c1-2) # get first two characters
+    template=$(echo ${1} | cut -c7-) # get 7th character untill final
     echo ${vl}-${template}
 }
 
@@ -46,7 +46,7 @@ copyTemplate
 
 # Populate variables
 description=$(cat ../../package.json | jq --raw-output '.description')
-componentFullName=$(cat ../../package.json | jq --raw-output '.name') #vl-ui-template
+componentFullName=$(cat ../../package.json | jq --raw-output '.name')
 apiName=$(getApiName ${componentFullName})
 demoName=$(getDemoName ${componentFullName})
 
