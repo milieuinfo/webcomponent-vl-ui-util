@@ -1,6 +1,5 @@
+bash -s -- "$@" <<"EOF"
 #!/usr/bin/env bash
-
-ps
 
 #################################################################################################
 #                                       Helper functions                                        #
@@ -59,3 +58,4 @@ sed -i "" -e "s/@demoName@/${demoName}/g" README.md.template
 # Clean up after ourselves
 rm -rf README.md
 mv README.md.template README.md
+EOF
