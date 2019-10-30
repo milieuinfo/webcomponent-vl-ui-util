@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -e
+
 #################################################################################################
 #                                       Helper functions                                        #
 #################################################################################################
@@ -56,4 +58,4 @@ sed -i "" -e "s/@demoName@/${demoName}/g" README.md.template
 
 # Clean up after ourselves
 rm -rf README.md
-mv README.md.template README.new.md
+mv -fv README.md.template README.new.md
