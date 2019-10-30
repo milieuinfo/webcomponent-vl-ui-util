@@ -45,8 +45,8 @@ installJqDependency
 copyTemplate
 
 # Populate variables
-description=$(cat ../../package.json | jq '.description')
-componentFullName=$(cat ../../package.json | jq '.name') #vl-ui-template
+description=$(cat ../../package.json | jq --raw-output '.description')
+componentFullName=$(cat ../../package.json | jq --raw-output '.name') #vl-ui-template
 apiName=$(getApiName ${componentFullName})
 demoName=$(getDemoName ${componentFullName})
 
