@@ -14,7 +14,7 @@
     "registry": "http://artifactory-pr-build.lb.cumuli.be:8081/artifactory/api/npm/acd-npm/"
   },
   "config": {
-    "script-shell": "bash" 
+    "script-shell": "bash"
   },
   "scripts": {
     "util": "npm run install:sass && npm run install:copy && npm run install:fonts && npm run install:bamboo && npm run install:copy:github",
