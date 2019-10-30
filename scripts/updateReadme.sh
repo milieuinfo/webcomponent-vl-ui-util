@@ -31,7 +31,7 @@ getDemoName() {
 }
 
 copyTemplate() { 
-    cp ${CWD}/templates/README.md.template README.md.template
+    cp ${CWD}/../templates/README.md.template README.md.template
 }
 
 #################################################################################################
