@@ -57,5 +57,5 @@ sed -i "" -e "s/@apiName@/${apiName}/g" README.md.template
 sed -i "" -e "s/@demoName@/${demoName}/g" README.md.template
 
 # Clean up after ourselves
-rm -rf README.md
-mv -fv README.md.template ../../../README.new.md
+rm -rf ../../README.md
+mv -fv README.md.template ../../README.md
