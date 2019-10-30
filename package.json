@@ -13,6 +13,9 @@
   "publishConfig": {
     "registry": "http://artifactory-pr-build.lb.cumuli.be:8081/artifactory/api/npm/acd-npm/"
   },
+  "config": {
+    "script-shell": "bash" 
+  },
   "scripts": {
     "util": "npm run install:sass && npm run install:copy && npm run install:fonts && npm run install:bamboo && npm run install:copy:github",
     "install:utils": "npm run install:bamboo && npm run install:copy:install && npm run install:copy:codeowner && npm run install:copy:github",
@@ -35,7 +38,8 @@
     "install:font:vlaanderen-icon": "replace '/font/iconfont/vlaanderen-icon.woff' 'https://cdn.milieuinfo.be/vlaanderen-font/LATEST/font/iconfont/3.9.1/vlaanderen-icon.woff' ../../style.css",
     "release": "np",
     "release:prepare": "echo 2Fabiola for the bigger and bolder",
-    "release:testless": "np --yolo"
+    "release:testless": "np --yolo",
+    "update:readme": "bash ./scripts/updateReadme.sh"
   },
   "dependencies": {
     "prismjs": "1.17.1",
