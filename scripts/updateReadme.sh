@@ -16,15 +16,12 @@ installJqDependency() {
 
 getApiName() {
     IFS='-' # hyphen (-) is set as delimiter
-        read -ra ADDR <<< "${1}" # str is read into an array as tokens separated by IFS
-        echo ${1}
-        echo ${ADDR}
-        for i in "${ADDR[@]}"; do # access each element of array
-            echo ${apiName}
-            apiName+=${i^} #set first letter to uppercase
+        read -ra array <<< "$1" # str is read into an array as tokens separated by IFS
+        for i in "${array[@]}"; do # access each element of array
+            output+=${i^} #set first letter to uppercase
         done
     IFS=' '
-    echo ${apiName}
+    echo ${output}
 }
 
 getDemoName() {
