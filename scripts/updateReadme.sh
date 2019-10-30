@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+ps
+
 #################################################################################################
 #                                       Helper functions                                        #
 #################################################################################################
@@ -18,7 +20,7 @@ getApiName() {
     IFS='-' # hyphen (-) is set as delimiter
         read -ra array <<< "$1" # str is read into an array as tokens separated by IFS
         for i in "${array[@]}"; do # access each element of array
-            output+=${i^} #set first letter to uppercase
+            output+=$(printf %s "$1" | sed -E 's/(^|-+)(.)/\U\2/g') #set first letter to uppercase
         done
     IFS=' '
     echo ${output}
