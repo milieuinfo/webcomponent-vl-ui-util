@@ -11,8 +11,8 @@ function browserName() {
         } else if (argv.safari) {
             return "safari"
         } else {
-            console.error("Ongeldige browser!");
-            process.exit(3);
+            console.warn("Geen geldige browser gevonden, default Chrome browser!")
+            return "chrome";
         }
     } else {
         console.error("Geen argumenten meegegeven!");
