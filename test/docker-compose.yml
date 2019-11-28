@@ -27,7 +27,7 @@ services:
     environment: 
       - http_proxy=${http_proxy}
       - https_proxy=${https_proxy}
-      - no_proxy=${no_proxy},selenium-hub,host
+      - no_proxy=${no_proxy},selenium-hub,tests
       - HTTP_PROXY=${http_proxy}
       - HTTPS_PROXY=${https_proxy}
     extra_hosts:
@@ -39,6 +39,3 @@ services:
       - ${HOME:-.}/.git-credentials:/root/.git-credentials:ro
       - ..:/data:ro
       - ./wct.docker.conf.json:/workdir/wct.conf.json:ro
-networks:
-  build-network:
-    driver: bridge
