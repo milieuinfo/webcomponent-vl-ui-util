@@ -4,19 +4,23 @@ services:
     image: ${DOCKER_REGISTRY}selenium/hub:3.141.59
     container_name: selenium-hub
   selenium-chrome:
-    image: ${DOCKER_REGISTRY}selenium/node-chrome:3.141.59
+    image: ${DOCKER_REGISTRY}selenium/node-chrome-debug:3.141.59
     depends_on:
       - selenium-hub
     environment:
       - HUB_HOST=selenium-hub
       - HUB_PORT=4444
+    ports:
+      - 5900:5900
   selenium-firefox:
-    image: ${DOCKER_REGISTRY}selenium/node-firefox:3.141.59
+    image: ${DOCKER_REGISTRY}selenium/node-firefox-debug:3.141.59
     depends_on:
       - selenium-hub
     environment:
       - HUB_PORT_4444_TCP_ADDR=selenium-hub
       - HUB_PORT_4444_TCP_PORT=4444
+    ports:
+      - 5901:5900
   tests:
     image: ${DOCKER_REGISTRY}node:12
     command: bash -c "cp -R /data/. /workdir && npm install && npm run test:grid"
