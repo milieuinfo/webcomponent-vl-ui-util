@@ -1,6 +1,6 @@
 {
   "name": "vl-ui-util",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "description": "De util verzamelt verschillende handige webcomponent scripts.",
   "main": "vl-util.js",
   "author": "DIDM",
