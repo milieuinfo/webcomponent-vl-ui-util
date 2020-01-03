@@ -37,33 +37,14 @@
     "install:font:path-serif": "replace 'https://ui.vlaanderen.be/assets/fonts/serif/FlandersArtSerif' 'https://cdn.milieuinfo.be/vlaanderen-font/LATEST/font/flandersart/FlandersArtSerif' ../../style.css",
     "install:font:path-italic": "replace 'https://ui.vlaanderen.be/assets/fonts/italic/FlandersArtSans' 'https://cdn.milieuinfo.be/vlaanderen-font/LATEST/font/flandersart/FlandersArtSansItalic' ../../style.css",
     "install:font:vlaanderen-icon": "replace '/font/iconfont/vlaanderen-icon.woff' 'https://cdn.milieuinfo.be/vlaanderen-font/LATEST/font/iconfont/3.9.1/vlaanderen-icon.woff' ../../style.css",
-    "pretest": "npm install chromedriver --chromedriver-force-download",
-    "test": "npm run test:unit && npm run test:e2e",
-    "test:unit": "wct --config-file ./wct.local.conf.json --verbose",
-    "test:e2e": "npm run test:server:start && npm run test:e2e:chrome && npm run test:e2e:firefox",
-    "test:e2e:grid": "npm run test:server:start && npm run test:e2e:chrome:grid && npm run test:e2e:firefox:grid",
-    "test:grid": "wct --config-file ./wct.docker.conf.json && npm run test:e2e:grid",
-    "posttest:e2e": "pkill -f http-server",
-    "test:e2e:chrome": "mocha --chrome",
-    "test:e2e:chrome:grid": "mocha --chrome --grid",
-    "test:e2e:firefox": "mocha --firefox",
-    "test:e2e:firefox:grid": "mocha --firefox --grid",
-    "test:e2e:opera": "mocha --opera",
-    "test:e2e:safari": "mocha --safari",
-    "test:server:start": "http-server &",
     "update:readme": "bash ./scripts/updateReadme.sh",
     "release": "np",
     "release:prepare": "echo 2Fabiola for the bigger and bolder",
-    "release:testless": "np --yolo",
-    "demo": "http-server"
+    "release:testless": "np --yolo"
   },
   "dependencies": {
     "prismjs": "1.17.1",
-    "yaml": "1.7.2"
-  },
-  "devDependencies": {
-    "copyfiles": "2.1.1",
-    "eslint": "^6.3.0",
+    "yaml": "1.7.2",
     "chai": "4.2.0",
     "chai-as-promised": "7.1.1",
     "chromedriver": "79.0.0",
@@ -77,5 +58,9 @@
     "wct-browser-legacy": "1.0.2",
     "web-component-tester": "6.9.2",
     "yargs": "15.0.2"
+  },
+  "devDependencies": {
+    "copyfiles": "2.1.1",
+    "eslint": "^6.3.0"
   }
 }
