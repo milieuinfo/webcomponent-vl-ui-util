@@ -58,7 +58,8 @@
     "wct-browser-legacy": "1.0.2",
     "web-component-tester": "6.9.2",
     "yargs": "15.0.2",
-    "fetch-mock": "^8.1.0"
+    "fetch-mock": "^8.1.0",
+    "sinon": "7.5.0"
   },
   "devDependencies": {
     "copyfiles": "2.1.1",
