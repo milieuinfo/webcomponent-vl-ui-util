@@ -51,10 +51,18 @@ apiName=$(getApiName ${componentFullName})
 demoName=$(getDemoName ${componentFullName})
 
 # Replace all template occurances with correct value
-sed -i "" -e "s/@description@/${description}/g" README.md.template
-sed -i "" -e "s/@fullName@/${componentFullName}/g" README.md.template
-sed -i "" -e "s/@apiName@/${apiName}/g" README.md.template
-sed -i "" -e "s/@demoName@/${demoName}/g" README.md.template
+
+if [[ "$OSTYPE" == "linux-gnu" ]]; then
+    sed -i -e "s/@description@/${description}/g" README.md.template
+    sed -i -e "s/@fullName@/${componentFullName}/g" README.md.template
+    sed -i -e "s/@apiName@/${apiName}/g" README.md.template
+    sed -i -e "s/@demoName@/${demoName}/g" README.md.template
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+    sed -i "" -e "s/@description@/${description}/g" README.md.template
+    sed -i "" -e "s/@fullName@/${componentFullName}/g" README.md.template
+    sed -i "" -e "s/@apiName@/${apiName}/g" README.md.template
+    sed -i "" -e "s/@demoName@/${demoName}/g" README.md.template
+fi
 
 # Clean up after ourselves
 rm -rf ../../README.md
