@@ -17,7 +17,7 @@
     "script-shell": "bash"
   },
   "scripts": {
-    "util": "npm run install:sass && npm run install:copy && npm run install:fonts && npm run install:bamboo && npm run install:copy:github && npm run update:readme",
+    "util": "npm run install:sass && npm run install:copy && npm run install:css:minify && npm run install:fonts && npm run install:bamboo && npm run install:copy:github && npm run update:readme",
     "install:utils": "npm run install:bamboo && npm run install:copy:install && npm run install:copy:codeowner && npm run install:copy:github",
     "install:bamboo": "node ./bamboo/bamboo-spec.js",
     "install:sass": "npm run install:sass:webcomponent && npm run install:sass:demo",
@@ -32,6 +32,7 @@
     "install:copy:github": "cp -R .github ../../",
     "install:copy:demo:css": "copyfiles -f demo.css ../../demo",
     "install:copy:prismjs": "copyfiles -f 'node_modules/prismjs/**' ../../node_modules/prismjs",
+    "install:css:minify": "minify ../../style.css > ../../style.min.css && cp ../../style.min.css ../../style.css && rm ../../style.min.css",
     "install:fonts": "npm run install:font:path-sans && npm run install:font:path-serif && npm run install:font:path-italic && npm run install:font:vlaanderen-icon",
     "install:font:path-sans": "replace 'https://ui.vlaanderen.be/assets/fonts/sans/FlandersArtSans' 'https://cdn.milieuinfo.be/vlaanderen-font/LATEST/font/flandersart/FlandersArtSans' ../../style.css",
     "install:font:path-serif": "replace 'https://ui.vlaanderen.be/assets/fonts/serif/FlandersArtSerif' 'https://cdn.milieuinfo.be/vlaanderen-font/LATEST/font/flandersart/FlandersArtSerif' ../../style.css",
