@@ -2,7 +2,7 @@
   "name": "vl-ui-util",
   "version": "3.4.4",
   "description": "De util verzamelt verschillende handige webcomponent scripts.",
-  "main": "vl-util.js",
+  "main": "index.js",
   "author": "DIDM",
   "license": "MIT",
   "repository": {
@@ -21,7 +21,7 @@
     "install:utils": "npm run install:bamboo && npm run install:copy:install && npm run install:copy:codeowner && npm run install:copy:github",
     "install:bamboo": "node ./bamboo/bamboo-spec.js",
     "install:sass": "npm run install:sass:webcomponent && npm run install:sass:demo",
-    "install:sass:webcomponent": "sass ../../style.scss ../../style.css --load-path ../../node_modules/@govflanders",
+    "install:sass:webcomponent": "sass ../../src/style.scss ../../style.css --load-path ../../node_modules/@govflanders",
     "install:sass:demo": "sass demo.scss ../../demo/demo.css --load-path ../../node_modules/@govflanders",
     "install:copy": "npm run install:copy:install && npm run install:copy:test && npm run install:copy:release && npm run install:copy:demo:js && npm run install:copy:demo:css && npm run install:copy:prismjs && npm run install:copy:codeowner && npm run install:copy:github && npm run install:copy:wct",
     "install:copy:install": "npm i copyfiles@2.1.0 --save",
@@ -42,7 +42,8 @@
     "update:readme": "bash ./scripts/updateReadme.sh",
     "release": "np",
     "release:prepare": "echo 2Fabiola for the bigger and bolder",
-    "release:testless": "np --yolo"
+    "release:testless": "np --yolo",
+    "explode": "node exploder.js"
   },
   "dependencies": {
     "chai": "4.2.0",
@@ -61,7 +62,8 @@
     "wct-browser-legacy": "1.0.2",
     "web-component-tester": "6.9.2",
     "yaml": "1.7.2",
-    "yargs": "15.0.2"
+    "yargs": "15.0.2",
+    "event-stream": "^4.0.1"
   },
   "devDependencies": {
     "copyfiles": "2.1.1",
