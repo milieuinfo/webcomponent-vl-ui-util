@@ -57,6 +57,7 @@
     "np": "4.0.2",
     "prismjs": "1.17.1",
     "replace": "1.1.1",
+    "sass": "1.24.4",
     "selenium-webdriver": "4.0.0-alpha.5",
     "sinon": "7.5.0",
     "wct-browser-legacy": "1.0.2",
