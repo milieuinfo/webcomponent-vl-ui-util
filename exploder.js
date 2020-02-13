@@ -14,7 +14,7 @@ let stream = fs.createReadStream(getFilePath())
 
         if (line.indexOf('@import "') >= 0) {
             let filePath = sanitizeFilepath(line);
-            let style = fs.readFileSync('../../' + filePath);
+            let style = fs.readFileSync('../..' + filePath);
             output.write(style + '\r\n');
         } else {
             output.write(line + '\r\n');
