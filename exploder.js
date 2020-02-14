@@ -6,13 +6,14 @@ if (!fileNameParameterExists()) {
     process.exit(1);
 }
 
+const regex = new RegExp('.*style\.css(\'|");$');
 let output = fs.createWriteStream(getTempFilePath(), { encoding: 'utf-8' });
 let stream = fs.createReadStream(getFilePath())
     .pipe(es.split())
     .pipe(es.mapSync((line) => {
         stream.pause();
 
-        if (line.indexOf('@import "') >= 0) {
+        if (regex.test(line)) {
             let filePath = sanitizeFilepath(line);
             let style = fs.readFileSync('../..' + filePath);
             output.write(style + '\r\n');
@@ -30,10 +31,11 @@ let stream = fs.createReadStream(getFilePath())
             cleanup();
         })
     );
-    
 
 function sanitizeFilepath(input) {
-    return input.split("\"")[1].replace('../', '')
+    return ['@import', '\'', '\"', ';'].reduce((input, splitter) => {
+        return input.split(splitter).join('');
+    }, input).trim();
 }
 
 function getFileName() {
@@ -51,7 +53,7 @@ function getTempFilePath() {
 function deleteSource() {
     if (fs.existsSync(getFilePath())) {
         fs.unlinkSync(getFilePath(), (err) => {
-            if (err) throw err
+            if (err) throw err;
         });
     }
 }
