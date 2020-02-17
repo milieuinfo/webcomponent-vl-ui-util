@@ -67,7 +67,7 @@
     "event-stream": "^4.0.1"
   },
   "devDependencies": {
-    "copyfiles": "2.1.1",
+    "copyfiles": "2.2.0",
     "eslint": "^6.3.0"
   }
 }
