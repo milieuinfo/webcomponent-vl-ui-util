@@ -51,7 +51,7 @@
     "chromedriver": "80.0.1",
     "fetch-mock": "^8.1.0",
     "geckodriver": "1.19.1",
-    "http-server": "0.12.0",
+    "http-server": "0.12.1",
     "minify": "^5.0.0",
     "mocha": "6.2.2",
     "np": "4.0.2",
