@@ -12,7 +12,7 @@ const doc = yaml.parseAllDocuments(file);
 const spec = doc[0];
 const permissions = doc[1];
 const specPlan = spec.get('plan');
-const permissionPlan = permissions.get('plan')
+const permissionPlan = permissions.get('plan');
 
 specPlan.set('key', planKey);
 specPlan.set('name', planName);
