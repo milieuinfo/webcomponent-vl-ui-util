@@ -1,6 +1,7 @@
-let fs = require('fs');
-let es = require('event-stream');
-let argv = require('yargs').argv
+const fs = require('fs');
+const es = require('event-stream');
+const argv = require('yargs').argv;
+const path = require('path');
 
 if (!argv.file || !argv.basePath) {
     process.exit(1);
@@ -18,8 +19,10 @@ function explodeCss(file, basePath) {
 		stream.pause();
 		
 		if (regex.test(line)) {
-			let filePath = sanitizeFilepath(line);
-			let style = fs.readFileSync(basePath  + '/' + filePath);
+			const filePath = sanitizeFilepath(line);
+			const cssFile = basePath + filePath;
+			const style = fs.readFileSync(cssFile);
+			console.log(`Inling ${cssFile} in ${file}`);
 			output.write(style + '\r\n');
 		} else {
 			output.write(line + '\r\n');

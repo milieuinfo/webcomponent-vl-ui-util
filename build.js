@@ -1,49 +1,73 @@
 const execSync = require('child_process').execSync;
-const path = process.argv[2];
+const basePath = process.argv[2];
 const webcomponent = process.argv[3];
+const fs = require('fs');
+const path = require('path');
 
 class WebComponentBuild {
 	constructor(path, webcomponent) {
 		this.path = path;
 		this.webcomponent = webcomponent;
+		this.srcFolder = `${this.path}/src`;
+		this.distFolder = `${this.path}/dist`;
 	}
 
 	execute() {
-		this.__buildEs6();
-		this.__buildEs6Min();
-		this.__buildNode();
+		this.__cleanDistFolder();
+		this.__copyNonVlSrcToDist();
+		fs.readdirSync(this.srcFolder).forEach(file => {
+			if (file.startsWith("vl-")) {
+				this.__build(path.resolve(this.srcFolder, file));
+			}
+		});
 		this.__commit();
 	}
+	
+	__cleanDistFolder() {
+		fs.rmdirSync(this.distFolder, { recursive: true });
+		fs.mkdirSync(this.distFolder);
+	}
 
-	__buildEs6() {
-		const es6BuildFile = `${this.path}/vl-${this.webcomponent}.js`;
-		this.__copySrcTo(es6BuildFile);
-		this.__maakStyleImportAbsoluut(es6BuildFile);
-		this.__maakDistImportsAbsoluut(es6BuildFile);
+	__copyNonVlSrcToDist() {
+		copyFilesTo(this.srcFolder, this.distFolder, file => !file.startsWith("vl-"));
+	}
+	
+	__build(file) {
+		this.__buildEs6(file);
+		this.__buildEs6Min(file);
+		this.__buildNode(file);
+	}
+	
+	__buildEs6(file) {
+		const es6BuildFile = `${this.distFolder}/${fileNameWithoutExtension(file)}.js`;
+		copy(file, es6BuildFile);
+		this.__maakStyleImportAbsoluutNaarDist(es6BuildFile);
+		this.__maakLibImportsAbsoluut(es6BuildFile);
+		this.__maakVlSrcImportsAbsoluut(es6BuildFile);
 		this.__maakSrcImportsAbsoluut(es6BuildFile);
 	}
 	
-	__buildEs6Min() {
-		const es6MinBuildFile = `${this.path}/vl-${this.webcomponent}.min.js`;
-		this.__copySrcTo(es6MinBuildFile);
-		this.__maakDistImportsAbsoluut(es6MinBuildFile);
+	__buildEs6Min(file) {
+		const es6MinBuildFile = `${this.distFolder}/${fileNameWithoutExtension(file)}.min.js`;
+		copy(file, es6MinBuildFile);
+		this.__vervangWebcomponentenImportsDoorMinifiedImports(es6MinBuildFile);
+		this.__vervangGovFlandersImportsDoorMinifiedImports(es6MinBuildFile);
+		this.__maakLibImportsAbsoluut(es6MinBuildFile);
+		this.__maakVlSrcImportsAbsoluut(es6MinBuildFile);
 		this.__maakSrcImportsAbsoluut(es6MinBuildFile);
 		this.__inlineCss(es6MinBuildFile);
 		this.__minify(es6MinBuildFile);
 	}
 
-	__buildNode() {
-		const nodeBuildFile = `${this.path}/vl-${this.webcomponent}.src.js`;
-		this.__copySrcTo(nodeBuildFile);
-		this.__vervangWebcomponentenImportsDoorCommonJsImports(nodeBuildFile);
-		this.__vervangThidPartyImportsDoorCommonJsImports(nodeBuildFile);
-		this.__vervangLocalDistImportsDoorCommonJsImports(nodeBuildFile);
-		this.__vervangLocalSrcImportsDoorCommonJsImports(nodeBuildFile);
+	__buildNode(file) {
+		const nodeBuildFile = `${this.distFolder}/${fileNameWithoutExtension(file)}.src.js`;
+		copy(file, nodeBuildFile);
+		this.__vervangWebcomponentenImportsDoorRelatieveImports(nodeBuildFile);
+		this.__vervangThirdPartyImportsDoorRelatieveImports(nodeBuildFile);
+		this.__vervangLocalLibImportsDoorRelatieveImports(nodeBuildFile);
+		this.__vervangLocalVlSrcImportsDoorRelatieveImports(nodeBuildFile);
+		this.__vervangLocalSrcImportsDoorRelatieveImports(nodeBuildFile);
 		this.__inlineCss(nodeBuildFile);
-	}
-	
-	__copySrcTo(destFile) {
-		executeCommand(`cp -R -f ${this.path}/src/*.src.js ${destFile}`);
 	}
 	
 	__inlineCss(file) {
@@ -56,41 +80,57 @@ class WebComponentBuild {
 		executeCommand(script);
 	}
 	
-	__maakStyleImportAbsoluut(file) {
-		replace(`${quoted('/style.css')}`, `'/node_modules/vl-ui-${this.webcomponent}/style.css'`, file);
+	__maakStyleImportAbsoluutNaarDist(file) {
+		replace(`${quoted('/src/style.css')}`, `'/node_modules/vl-ui-${this.webcomponent}/dist/style.css'`, file);
 	}
 	
-	__maakDistImportsAbsoluut(file) {
-		replace(`import ${quoted('/dist/(.*)')}`, `import '/node_modules/vl-ui-${this.webcomponent}/dist/\\$1'`, file);
+	__maakLibImportsAbsoluut(file) {
+		replace(`import ${quoted('/lib/(.*)')}`, `import '/node_modules/vl-ui-${this.webcomponent}/lib/\\$1'`, file);
+	}
+
+	__maakVlSrcImportsAbsoluut(file) {
+		replace(`from ${quoted('/src/vl-(.*)')}`, `from '/node_modules/vl-ui-${this.webcomponent}/dist/vl-\\$1'`, file);
 	}
 
 	__maakSrcImportsAbsoluut(file) {
 		replace(`from ${quoted('/src/(.*)')}`, `from '/node_modules/vl-ui-${this.webcomponent}/src/\\$1'`, file);
 	}
 
-	__vervangWebcomponentenImportsDoorCommonJsImports(file) {
-		replace(`'/node_modules/vl-ui-(.*)/vl-(.*).js'`, `'vl-ui-\\$1'`, file);
+	__vervangWebcomponentenImportsDoorMinifiedImports(file) {
+		replace(`'/node_modules/vl-ui-(.*)/dist/vl-(.*).js'`, `'/node_modules/vl-ui-\\$1/dist/vl-\\$1.min.js'`, file);
+	}
+
+	__vervangGovFlandersImportsDoorMinifiedImports(file) {
+		replace(`'/node_modules/@govflanders/(.*).js'`, `'/node_modules/@govflanders/\\$1.min.js'`, file);
+	}
+
+	__vervangWebcomponentenImportsDoorRelatieveImports(file) {
+		replace(`'/node_modules/vl-ui-(.*)/dist/vl-(.*).js'`, `'vl-ui-\\$1'`, file);
 	}
 	
-	__vervangThidPartyImportsDoorCommonJsImports(file) {
+	__vervangThirdPartyImportsDoorRelatieveImports(file) {
 		replace(`'/node_modules/(.+\\.js)'`, `'\\$1'`, file);
 	}
 	
-	__vervangLocalDistImportsDoorCommonJsImports(file) {
-		replace(`import ${quoted('/dist/(.*)')}`, `import 'vl-ui-${this.webcomponent}/dist/\\$1'`, file);
+	__vervangLocalLibImportsDoorRelatieveImports(file) {
+		replace(`import ${quoted('/lib/(.*)')}`, `import 'vl-ui-${this.webcomponent}/lib/\\$1'`, file);
 	}
 	
-	__vervangLocalSrcImportsDoorCommonJsImports(file) {
+	__vervangLocalVlSrcImportsDoorRelatieveImports(file) {
+		replace(`from ${quoted('/src/vl-(.*)')}`, `from 'vl-ui-${this.webcomponent}/dist/vl-\\$1'`, file);
+	}
+
+	__vervangLocalSrcImportsDoorRelatieveImports(file) {
 		replace(`from ${quoted('/src/(.*)')}`, `from 'vl-ui-${this.webcomponent}/src/\\$1'`, file);
 	}
 
 	__commit() {
 		var gitCommand = `git --git-dir=${this.path}/.git --work-tree=${this.path}`;
-		executeCommand(`${gitCommand} add -f vl-*`);
+		executeCommand(`${gitCommand} add -f dist/*.*`);
 		executeCommand(`${gitCommand} commit --amend --no-edit`);
 		executeCommand(`${gitCommand} pull`);
 	}
-	
+
 }
 
 function executeCommand(script) {
@@ -101,8 +141,32 @@ function replace(search, replacement, file) {
 	executeCommand(`replace "${search}" "${replacement}" ${file}`);
 }
 
+function copy(srcFile, destFile) {
+	console.log(`Copying ${srcFile} to ${destFile}`);
+	fs.copyFileSync(srcFile, destFile);
+}
+
 function quoted(string) {
 	return `['\\\"]${string}['\\\"]`;
 }
 
-new WebComponentBuild(path, webcomponent).execute();
+function copyToFolder(srcFile, destFolder) {
+	const destFile = path.resolve(destFolder, path.basename(srcFile));
+	copy(srcFile, destFile);
+}
+
+function copyFilesTo(srcFolder, destFolder, predicate) {
+	fs.readdirSync(srcFolder).forEach(file => {
+		if (!predicate || predicate(file)) {
+			const srcFile = path.resolve(srcFolder, file);
+			copyToFolder(srcFile, destFolder);
+		}
+	});	
+
+}
+
+function fileNameWithoutExtension(file) {
+	return path.parse(path.basename(file)).name;
+}
+
+new WebComponentBuild(basePath, webcomponent).execute();
