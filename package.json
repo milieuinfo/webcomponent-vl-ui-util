@@ -42,6 +42,7 @@
     "update:readme": "bash ./scripts/updateReadme.sh",
     "release": "np",
     "release:prepare": "echo 2Fabiola for the bigger and bolder",
+    "release-component:prepare": "node build",
     "release:testless": "np --yolo",
     "explode": "node exploder.js"
   },
