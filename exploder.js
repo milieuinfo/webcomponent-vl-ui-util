@@ -2,35 +2,41 @@ let fs = require('fs');
 let es = require('event-stream');
 let argv = require('yargs').argv
 
-if (!fileNameParameterExists()) {
+if (!argv.file || !argv.basePath) {
     process.exit(1);
 }
 
-const regex = new RegExp('.*style\.css(\'|");$');
-let output = fs.createWriteStream(getTempFilePath(), { encoding: 'utf-8' });
-let stream = fs.createReadStream(getFilePath())
-    .pipe(es.split())
-    .pipe(es.mapSync((line) => {
-        stream.pause();
+explodeCss(argv.file, argv.basePath);
 
-        if (regex.test(line)) {
-            let filePath = sanitizeFilepath(line);
-            let style = fs.readFileSync('../..' + filePath);
-            output.write(style + '\r\n');
-        } else {
-            output.write(line + '\r\n');
-        }
-
-        stream.resume();
-    })
-        .on('error', (err) => {
-            console.log('Something went wrong.', err);
-        })
-        .on('end', () => {
-            output.end();
-            cleanup();
-        })
-    );
+function explodeCss(file, basePath) {
+	const regex = new RegExp('.*style\.css(\'|");$');
+	const tempFile = file + '.temp';
+	const output = fs.createWriteStream(tempFile, { encoding: 'utf-8' });
+	const stream = fs.createReadStream(file)
+	.pipe(es.split())
+	.pipe(es.mapSync((line) => {
+		stream.pause();
+		
+		if (regex.test(line)) {
+			let filePath = sanitizeFilepath(line);
+			let style = fs.readFileSync(basePath  + '/' + filePath);
+			output.write(style + '\r\n');
+		} else {
+			output.write(line + '\r\n');
+		}
+		
+		stream.resume();
+	})
+	.on('error', (err) => {
+		console.log('Something went wrong.', err);
+	})
+	.on('end', () => {
+		output.end();
+		deleteFile(file);
+		rename(tempFile, file);
+	})
+	);
+}
 
 function sanitizeFilepath(input) {
     return ['@import', '\'', '\"', ';'].reduce((input, splitter) => {
@@ -38,36 +44,16 @@ function sanitizeFilepath(input) {
     }, input).trim();
 }
 
-function getFileName() {
-    return argv.fileName;
-}
-
-function getFilePath() {
-    return '../../' + getFileName();
-}
-
-function getTempFilePath() {
-    return '../../' + getFileName() + '.temp';
-}
-
-function deleteSource() {
-    if (fs.existsSync(getFilePath())) {
-        fs.unlinkSync(getFilePath(), (err) => {
+function deleteFile(file) {
+    if (fs.existsSync(file)) {
+        fs.unlinkSync(file, (err) => {
             if (err) throw err;
         });
     }
 }
 
-function fileNameParameterExists() {
-    return argv.fileName;
-}
-
-function renameTempFile() {
-    fs.renameSync(getTempFilePath(), getFilePath(), () => {
+function rename(srcFile, destFile) {
+    fs.renameSync(srcFile, destFile, () => {
     });
 }
 
-function cleanup() {
-    deleteSource();
-    renameTempFile();
-}
