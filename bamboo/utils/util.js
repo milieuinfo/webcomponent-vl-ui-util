@@ -19,7 +19,8 @@ function getPackageName() {
 }
 
 function getPlanKey() {
-    return getPackageName().split('-').join('').toLocaleUpperCase();
+    let plan = getPackageName().split('-').join('').toLocaleUpperCase();
+    return 'WEBCO-' + plan;
 }
 
 function parseTemplate(file) {
