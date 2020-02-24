@@ -1,8 +1,10 @@
 const execSync = require('child_process').execSync;
-const basePath = process.argv[2];
-const webcomponent = process.argv[3];
+const argv = require('yargs').argv;
 const fs = require('fs');
 const path = require('path');
+const basePath = argv._[0];
+const webcomponent = argv._[1];
+const noCommit = argv._[2] == "no-commit";
 
 class WebComponentBuild {
 	constructor(path, webcomponent) {
@@ -20,9 +22,11 @@ class WebComponentBuild {
 				this.__build(path.resolve(this.srcFolder, file));
 			}
 		});
-		this.__commit();
+		if (!noCommit) {
+			this.__commit();
+		}
 	}
-	
+
 	__cleanDistFolder() {
 		fs.rmdirSync(this.distFolder, { recursive: true });
 		fs.mkdirSync(this.distFolder);
@@ -31,13 +35,13 @@ class WebComponentBuild {
 	__copyNonVlSrcToDist() {
 		copyFilesTo(this.srcFolder, this.distFolder, file => !file.startsWith("vl-"));
 	}
-	
+
 	__build(file) {
 		this.__buildEs6(file);
 		this.__buildEs6Min(file);
 		this.__buildNode(file);
 	}
-	
+
 	__buildEs6(file) {
 		const es6BuildFile = `${this.distFolder}/${fileNameWithoutExtension(file)}.js`;
 		copy(file, es6BuildFile);
@@ -69,7 +73,7 @@ class WebComponentBuild {
 		this.__vervangLocalSrcImportsDoorRelatieveImports(nodeBuildFile);
 		this.__inlineCss(nodeBuildFile);
 	}
-	
+
 	__inlineCss(file) {
 		executeCommand(`npm run explode -- --file=${file} --basePath=${this.path}`);
 	}
@@ -83,7 +87,7 @@ class WebComponentBuild {
 	__maakStyleImportAbsoluutNaarDist(file) {
 		replace(`${quoted('/src/style.css')}`, `'/node_modules/vl-ui-${this.webcomponent}/dist/style.css'`, file);
 	}
-	
+
 	__maakLibImportsAbsoluut(file) {
 		replace(`import ${quoted('/lib/(.*)')}`, `import '/node_modules/vl-ui-${this.webcomponent}/lib/\\$1'`, file);
 	}
@@ -115,7 +119,7 @@ class WebComponentBuild {
 	__vervangLocalLibImportsDoorRelatieveImports(file) {
 		replace(`import ${quoted('/lib/(.*)')}`, `import 'vl-ui-${this.webcomponent}/lib/\\$1'`, file);
 	}
-	
+
 	__vervangLocalVlSrcImportsDoorRelatieveImports(file) {
 		replace(`from ${quoted('/src/vl-(.*)')}`, `from 'vl-ui-${this.webcomponent}/dist/vl-\\$1'`, file);
 	}
@@ -161,7 +165,7 @@ function copyFilesTo(srcFolder, destFolder, predicate) {
 			const srcFile = path.resolve(srcFolder, file);
 			copyToFolder(srcFile, destFolder);
 		}
-	});	
+	});
 
 }
 
