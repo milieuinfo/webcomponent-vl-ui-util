@@ -3,4 +3,4 @@ module.exports = {
     "reporter": 'spec',
     "spec": ["test/**/*.test.js"],
     "timeout": '5000'
-}
+};
