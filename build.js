@@ -133,10 +133,10 @@ class WebComponentBuild {
 	__commit() {
 		var gitCommand = `git --git-dir=${this.path}/.git --work-tree=${this.path}`;
 		executeCommand(`${gitCommand} add -f ${this.path}/dist/*.*`);
+		executeCommand(`${gitCommand} add -f ${this.path}/package-lock.json`);
 		executeCommand(`${gitCommand} commit --amend --no-edit`);
 		executeCommand(`${gitCommand} pull`);
 	}
-
 }
 
 function executeCommand(script) {
