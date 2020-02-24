@@ -28,7 +28,9 @@ class WebComponentBuild {
 	}
 
 	__cleanDistFolder() {
-		fs.rmdirSync(this.distFolder, { recursive: true });
+		if (fs.existsSync(this.distFolder)) {
+			fs.rmdirSync(this.distFolder, { recursive: true });
+		}
 		fs.mkdirSync(this.distFolder);
 	}
 
@@ -130,7 +132,7 @@ class WebComponentBuild {
 
 	__commit() {
 		var gitCommand = `git --git-dir=${this.path}/.git --work-tree=${this.path}`;
-		executeCommand(`${gitCommand} add -f dist/*.*`);
+		executeCommand(`${gitCommand} add -f ${this.path}/dist/*.*`);
 		executeCommand(`${gitCommand} commit --amend --no-edit`);
 		executeCommand(`${gitCommand} pull`);
 	}
