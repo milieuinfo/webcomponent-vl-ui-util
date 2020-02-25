@@ -26,7 +26,7 @@
     "install:copy": "npm run install:copy:install && npm run install:copy:test && npm run install:copy:release && npm run install:copy:demo:js && npm run install:copy:demo:css && npm run install:copy:prismjs && npm run install:copy:codeowner && npm run install:copy:github && npm run install:copy:wct",
     "install:copy:install": "npm i copyfiles@2.1.0 --save",
     "install:copy:wct": "cp *.conf.json ../../",
-    "install:copy:test": "copyfiles -f test/* ../../test",
+    "install:copy:test": "copyfiles -f test/docker-compose.yml ../../test",
     "install:copy:release": "copyfiles -f docker-compose-release.yml ../../",
     "install:copy:demo:js": "copyfiles -f demo.js ../../demo",
     "install:copy:codeowner": "copyfiles CODEOWNERS ../../",
