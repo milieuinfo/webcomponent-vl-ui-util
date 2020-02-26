@@ -136,6 +136,7 @@ class WebComponentBuild {
 		executeCommand(`${gitCommand} add -f ${this.path}/package-lock.json`);
 		executeCommand(`${gitCommand} commit --amend --no-edit`);
 		executeCommand(`${gitCommand} pull`);
+		executeCommand(`${gitCommand} status`);
 	}
 }
 
