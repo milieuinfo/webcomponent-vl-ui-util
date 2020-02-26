@@ -71,6 +71,7 @@
   },
   "devDependencies": {
     "copyfiles": "2.2.0",
-    "eslint": "^6.3.0"
+    "eslint": "^6.3.0",
+    "octonode": "^0.9.5"
   }
 }
