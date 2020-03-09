@@ -1,6 +1,6 @@
 const github = require('octonode');
 
-const githubClient = github.client();
+const githubClient = github.client("86c0f8f2f6d01b1c97bbf66beabe8d61a4605b7f");
 
 function options() {
     const options = {
@@ -31,7 +31,7 @@ function options() {
     return options;
 }
 
-async function getWebcomponenten() {
+async function getWebcomponenten(reposFilter) {
     const org = githubClient.org('milieuinfo');
     let repos = [], reposInPage = [];
     let reposPage = 1;
@@ -47,7 +47,7 @@ async function getWebcomponenten() {
     } while (reposInPage && reposInPage.length > 0 && reposInPage[0].length > 0);
 
     return repos
-        .filter(repo => /^webcomponent-vl-ui/.test(repo.name))
+        .filter(reposFilter)
         .map(repo => githubClient.repo(repo.full_name));
 }
 
@@ -59,38 +59,42 @@ async function packageJsonOfWebcomponent(webcomponent) {
     }
 }
 
-function onlyVlDependencies(dependencies) {
-    return Object.keys(dependencies).filter(dependency => dependency.startsWith("vl-") && dependency !== "vl-ui-core");
-}
-
-function dependenciesAsGraph(componentName, dependencies) {
-    return dependencies.map(dependency => `"${componentName}" -> "${dependency}"`);
-}
-
-function printVlDependencies(componentName, dependencies, exclusions) {
-    const filteredDependencies = onlyVlDependencies(dependencies || [])
-        .filter(dependency => !exclusions.includes(dependency));
-    dependenciesAsGraph(componentName, filteredDependencies).forEach(d => console.log(d));
-}
-
 async function printGraph(options) {
-    const webcomponenten = await getWebcomponenten();
+	const reposFilter = repo => /^webcomponent-vl-ui/.test(repo.name) && !(/^webcomponent-vl-ui-form/.test(repo.name));
+	const dependenciesFilter = dependency => dependency.startsWith("vl-") 
+		&& dependency !== "vl-ui-core" && dependency !== 'vl-ui-util' && !options.exclusions.includes(dependency);
+	const dependencyLogFunction = (componentName, dependency, version) => { return `"${componentName}" -> "${dependency}"`; };
+
+    const webcomponenten = await getWebcomponenten(reposFilter);
     for (let i = 0; i < webcomponenten.length; i++) {
         const packageJson = await packageJsonOfWebcomponent(webcomponenten[i]);
         if (packageJson) {
             const componentName = packageJson.name;
-
-            if (!options.exclusions.includes(componentName)) {
-                if (options.dependencies) {
-                    printVlDependencies(componentName, packageJson.dependencies, options.exclusions);
-                }
-
-                if (options.devDependencies) {
-                    printVlDependencies(componentName, packageJson.devDependencies, options.exclusions);
-                }
-            }
+               if (options.dependencies) {
+                   printVlDependencies(componentName, packageJson.dependencies, dependenciesFilter, dependencyLogFunction);
+               }
+               if (options.devDependencies) {
+                   printVlDependencies(componentName, packageJson.devDependencies, dependenciesFilter, dependencyLogFunction);
+               }
         }
     }
 }
+
+function retainKeys(objToFilter, filter) {
+	return Object.keys(objToFilter)
+	  .filter(filter)
+	  .reduce((obj, key) => {
+	    obj[key] = objToFilter[key];
+	    return obj;
+	  }, {});
+}
+
+function printVlDependencies(componentName, dependencies, dependenciesFilter, dependencyLogFunction) {
+    const filteredDependencies = retainKeys(dependencies || [], dependenciesFilter);
+    Object.keys(filteredDependencies).map(dependency => {
+    	return dependencyLogFunction(componentName, dependency, filteredDependencies[dependency]);
+    }).forEach(line => console.log(line));
+}
+
 
 return printGraph(options()).catch(error => console.error(error));
