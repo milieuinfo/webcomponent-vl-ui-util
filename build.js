@@ -103,19 +103,19 @@ class WebComponentBuild {
 	}
 
 	__vervangWebcomponentenImportsDoorMinifiedImports(file) {
-		replace(`'/node_modules/vl-ui-(.*)/dist/vl-(.*).js'`, `'/node_modules/vl-ui-\\$1/dist/vl-\\$1.min.js'`, file);
+		replace(`${quoted('/node_modules/vl-ui-(.*)/dist/vl-(.*).js')}`, `'/node_modules/vl-ui-\\$1/dist/vl-\\$1.min.js'`, file);
 	}
 
 	__vervangGovFlandersImportsDoorMinifiedImports(file) {
-		replace(`'/node_modules/@govflanders/(.*).js'`, `'/node_modules/@govflanders/\\$1.min.js'`, file);
+		replace(`${quoted('/node_modules/@govflanders/(.*).js')}`, `'/node_modules/@govflanders/\\$1.min.js'`, file);
 	}
 
 	__vervangWebcomponentenImportsDoorRelatieveImports(file) {
-		replace(`'/node_modules/vl-ui-(.*)/dist/vl-(.*).js'`, `'vl-ui-\\$1'`, file);
+		replace(`${quoted('/node_modules/vl-ui-(.*)/dist/vl-(.*).js')}`, `'vl-ui-\\$1'`, file);
 	}
 	
 	__vervangThirdPartyImportsDoorRelatieveImports(file) {
-		replace(`'/node_modules/(.+\\.js)'`, `'\\$1'`, file);
+		replace(`${quoted('/node_modules/(.+\\.js)')}`, `'\\$1'`, file);
 	}
 	
 	__vervangLocalLibImportsDoorRelatieveImports(file) {
