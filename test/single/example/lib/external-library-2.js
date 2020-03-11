@@ -1,0 +1,1 @@
+console.log("external library 2 source code");
