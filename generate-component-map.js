@@ -1,6 +1,6 @@
 const github = require('octonode');
 
-const githubClient = github.client("86c0f8f2f6d01b1c97bbf66beabe8d61a4605b7f");
+const githubClient = github.client("????");
 
 function options() {
     const options = {
@@ -63,7 +63,8 @@ async function printGraph(options) {
 	const reposFilter = repo => /^webcomponent-vl-ui/.test(repo.name) && !(/^webcomponent-vl-ui-form/.test(repo.name));
 	const dependenciesFilter = dependency => dependency.startsWith("vl-") 
 		&& dependency !== "vl-ui-core" && dependency !== 'vl-ui-util' && !options.exclusions.includes(dependency);
-	const dependencyLogFunction = (componentName, dependency, version) => { return `"${componentName}" -> "${dependency}"`; };
+	const dependencyLogFunction = (componentName, dependency, version) => { return `"${componentName}" -> "${dependency}" [style=solid]`; };
+	const devDependencyLogFunction = (componentName, dependency, version) => { return `"${componentName}" -> "${dependency}" [style=dotted]`; };
 
     const webcomponenten = await getWebcomponenten(reposFilter);
     for (let i = 0; i < webcomponenten.length; i++) {
@@ -74,7 +75,7 @@ async function printGraph(options) {
                    printVlDependencies(componentName, packageJson.dependencies, dependenciesFilter, dependencyLogFunction);
                }
                if (options.devDependencies) {
-                   printVlDependencies(componentName, packageJson.devDependencies, dependenciesFilter, dependencyLogFunction);
+                   printVlDependencies(componentName, packageJson.devDependencies, dependenciesFilter, devDependencyLogFunction);
                }
         }
     }
