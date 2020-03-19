@@ -34,7 +34,7 @@
     "install:copy:github": "cp -R .github ../../",
     "install:copy:demo:css": "copyfiles -f demo.css ../../demo",
     "install:copy:prismjs": "copyfiles -f 'node_modules/prismjs/**' ../../node_modules/prismjs",
-    "install:copy:performance": "copyfiles -f performance/** ../../performance && copyfiles -f docker-compose-performance.yml ../../",
+    "install:copy:performance": "copyfiles -f performance/* ../../performance && copyfiles -f docker-compose-performance.yml ../../",
     "install:css:minify": "minify ../../src/style.css > ../../src/style.min.css && cp ../../src/style.min.css ../../src/style.css && rm ../../src/style.min.css",
     "install:fonts": "npm run install:font:path-sans && npm run install:font:path-serif && npm run install:font:path-italic && npm run install:font:vlaanderen-icon",
     "install:font:path-sans": "replace 'https://ui.vlaanderen.be/assets/fonts/sans/FlandersArtSans' 'https://cdn.milieuinfo.be/vlaanderen-font/LATEST/font/flandersart/FlandersArtSans' ../../src/style.css",
