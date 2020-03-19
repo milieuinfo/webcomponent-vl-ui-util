@@ -56,6 +56,7 @@
     "fetch-mock": "^8.1.0",
     "geckodriver": "1.19.1",
     "http-server": "0.12.1",
+    "jsdom": "16.2.1",
     "minify": "^5.0.0",
     "mocha": "^7.1.0",
     "np": "4.0.2",
