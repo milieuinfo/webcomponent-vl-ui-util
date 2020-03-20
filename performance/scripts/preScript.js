@@ -10,7 +10,7 @@ module.exports = async function (context, commands) {
         await commands.navigate(`http://${hostname}:${port}/${path}`);
         const webdriver = context.selenium.webdriver;
         const driver = context.selenium.driver;
-        const demos = await driver.findElements(By.css('.demo'));
+        const demos = await driver.findElements(webdriver.By.css('.demo'));
         context.log.info('Size: ' + demos.size)
         context.log.info('Size: ' + demos.length)
         return demos.length > 0;
