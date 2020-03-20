@@ -6,13 +6,11 @@ module.exports = async function (context, commands) {
     const port = '8080';
     const path = 'demo/performance.html';
 
-    async function countDemoComponents() {
+    async function areDemoComponentsPresent() {
         await commands.navigate(`http://${hostname}:${port}/${path}`);
         const webdriver = context.selenium.webdriver;
         const driver = context.selenium.driver;
         const demos = await driver.findElements(webdriver.By.css('.demo'));
-        context.log.info('Size: ' + demos.size)
-        context.log.info('Size: ' + demos.length)
         return demos.length > 0;
     }
 
@@ -22,9 +20,9 @@ module.exports = async function (context, commands) {
                 http.get(`http://${hostname}:${port}`, async (res) => {
                     const { statusCode } = res;
                     if (statusCode === 200) {
+                        context.log.info(`App available on ${hostname}:${port}.`);
                         try {
-                            context.log.info(`App available on ${hostname}:${port}.`);
-                            const demoComponents = await countDemoComponents();
+                            const demoComponents = await areDemoComponentsPresent();
                             if (demoComponents) {
                                 resolve();
                             } else {
