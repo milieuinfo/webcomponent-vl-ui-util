@@ -6,13 +6,14 @@ module.exports = async function (context, commands) {
     const port = '8080';
     const path = 'demo/performance.html';
 
-    async function openDemoPage() {
-        return commands.navigate(`http://${hostname}:${port}/${path}`);
-    }
-
     async function countDemoComponents() {
-        await countDemoComponents();
-        return commands.js.run('return document.querySelectorAll(".demo").length > 0');
+        await commands.navigate(`http://${hostname}:${port}/${path}`);
+        const webdriver = context.selenium.webdriver;
+        const driver = context.selenium.driver;
+        const demos = await driver.findElements(By.css('.demo'));
+        context.log.info('Size: ' + demos.size)
+        context.log.info('Size: ' + demos.length)
+        return demos.length > 0;
     }
 
     return new Promise(resolve => {
@@ -21,14 +22,15 @@ module.exports = async function (context, commands) {
                 http.get(`http://${hostname}:${port}`, async (res) => {
                     const { statusCode } = res;
                     if (statusCode === 200) {
-                        context.log.info(`App available on ${hostname}:${port}.`);
                         try {
-                            if ((await countDemoComponents())) {
+                            context.log.info(`App available on ${hostname}:${port}.`);
+                            const demoComponents = await countDemoComponents();
+                            if (demoComponents) {
                                 resolve();
                             } else {
                                 throw e;
                             }
-                        } catch (e) {
+                        } catch (e){
                             throw e;
                         }
                     } else {
