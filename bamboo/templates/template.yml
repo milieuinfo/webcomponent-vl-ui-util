@@ -5,23 +5,6 @@ plan:
   key: abc
   name: Bamboo spec
 
-artifacts:
-  -
-    name: Test reports
-    location: performance/results/
-    pattern: '**/*.xml'
-    required: true
-  -
-    name: Chrome results
-    location: performance/results/chrome/
-    pattern: '**/*'
-    required: true
-  -
-    name: Firefox results
-    location: performance/results/firefox
-    pattern: '**/*'
-    required: true
-
 triggers:
   - polling: 130
   - cron: 0 0 1,3,12,19,21 ? * * *
@@ -51,6 +34,19 @@ Build:
   final-tasks:
     - script: 
         /opt/scripts/docker/stop-docker-containers.sh
+  artifacts:
+    - name: Test reports
+      location: performance/results/
+      pattern: '**/*.xml'
+      required: true
+    - name: Chrome results
+      location: performance/results/chrome/
+      pattern: '**/*'
+      required: true
+    - name: Firefox results
+      location: performance/results/firefox
+      pattern: '**/*'
+      required: true
   requirements:
     - REMOTE_ONLY
 
