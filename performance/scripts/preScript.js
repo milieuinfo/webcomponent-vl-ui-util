@@ -2,7 +2,7 @@ const http = require('http');
 
 module.exports = async function (context, commands) {
 
-    const hostname = 'demo';
+    const hostname = 'demo.app.io';
     const port = '8080';
     const path = 'demo/performance.html';
 
