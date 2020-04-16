@@ -48,7 +48,7 @@
     "release-component:prepare": "node build",
     "release:testless": "np --yolo",
     "explode": "node exploder.js",
-    "format": "eslint --ext *.js,*.css,*.html"
+    "format": "eslint --ext .js --ext .css --ext .html ../../*"
   },
   "dependencies": {
     "chai": "4.2.0",
