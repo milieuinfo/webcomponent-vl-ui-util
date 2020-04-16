@@ -8,14 +8,17 @@
     "extends": [
         "google"
     ],
+    "ignorePatterns": [
+        "../../node_modules/",
+        "CODEOWNERS",
+        "*.yml",
+        "package-lock.json"
+    ],
     "globals": {
         "Atomics": "readonly",
         "SharedArrayBuffer": "readonly"
     },
-    "ignorePatterns": ["node_modules/"],
     "parserOptions": {
         "ecmaVersion": 2018
-    },
-    "rules": {
     }
 }
