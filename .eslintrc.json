@@ -9,9 +9,10 @@
         "google"
     ],
     "ignorePatterns": [
-        "../../node_modules/",
+        "**/node_modules",
         "CODEOWNERS",
         "*.yml",
+        "*.md",
         "package-lock.json"
     ],
     "globals": {
