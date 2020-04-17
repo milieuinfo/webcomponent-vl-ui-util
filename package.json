@@ -48,13 +48,13 @@
     "release-component:prepare": "node build",
     "release:testless": "np --yolo",
     "explode": "node exploder.js",
-    "format": "eslint ../../. --ext .js --ext .css --ext .html -c .eslintrc.json --no-eslintrc --debug"
+    "format": "eslint ../../* --ext .js --ext .css --ext .html -c .eslintrc.json --no-eslintrc --debug"
   },
   "dependencies": {
     "chai": "4.2.0",
     "chai-as-promised": "7.1.1",
     "chromedriver": "80.0.2",
-    "eslint": "^6.8.0",
+    "eslint": "7.0.0-alpha.3",
     "eslint-config-google": "^0.14.0",
     "event-stream": "^4.0.1",
     "fetch-mock": "^8.1.0",
