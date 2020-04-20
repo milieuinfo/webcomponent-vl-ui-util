@@ -1,25 +1,39 @@
 {
     "env": {
-        "browser": true,
-        "commonjs": true,
-        "es6": true,
-        "node": true
+      "browser": true,
+      "commonjs": true,
+      "es6": true,
+      "node": true,
+      "mocha": true
     },
-    "extends": [
-        "google"
-    ],
-    "ignorePatterns": [
-        "**/node_modules",
-        "CODEOWNERS",
-        "*.yml",
-        "*.md",
-        "package-lock.json"
-    ],
+    "extends": ["google"],
     "globals": {
-        "Atomics": "readonly",
-        "SharedArrayBuffer": "readonly"
+      "Atomics": "readonly",
+      "SharedArrayBuffer": "readonly"
     },
+    "ignorePatterns": [
+      "**/node_modules",
+      "CODEOWNERS",
+      "*.yml",
+      "*.md",
+      "package-lock.json"
+    ],
+    "overrides": [
+      {
+        "files": ["dist/*.js", "src/*.js", "demo/demo.js"],
+        "parserOptions": {
+          "sourceType": "module"
+        }
+      }
+    ],
     "parserOptions": {
-        "ecmaVersion": 2018
+      "ecmaVersion": 2020
+    },
+    "plugins": [
+        "eslint-plugin-html"
+    ],
+    "rules": {
+      "require-jsdoc": "off"
     }
-}
+  }
+  
