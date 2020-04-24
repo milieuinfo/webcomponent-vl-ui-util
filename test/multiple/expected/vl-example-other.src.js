@@ -6,18 +6,17 @@ import 'vl-ui-button';
 import { analytics } from 'vl-ui-example/src/non-vl.js';
 
 export class VlExampleOther extends VlElement(HTMLElement) {
-    constructor() {
-        super(`
-            <style>
+  constructor() {
+    super(`
+      <style>
 .example{color: black;}
 .example{color: black;}
 .dependency{color: red;}
 .dependency{color: red;}
-            </style>
-            <div>
-        		example
-            </div>
-        `);
-    }
-
+      </style>
+      <div>
+        example
+      </div>
+    `);
+  }
 }
