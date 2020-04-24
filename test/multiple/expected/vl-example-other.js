@@ -6,18 +6,17 @@ import '/node_modules/vl-ui-button/dist/vl-button.js';
 import { analytics } from '/node_modules/vl-ui-example/src/non-vl.js';
 
 export class VlExampleOther extends VlElement(HTMLElement) {
-    constructor() {
-        super(`
-            <style>
-        		@import '/node_modules/vl-ui-example/dist/style.css';
-        		@import '/node_modules/vl-ui-example/dist/style.css';
-        		@import '/node_modules/vl-ui-dependency/dist/style.css';
-        		@import "/node_modules/vl-ui-dependency/dist/style.css";
-            </style>
-            <div>
-        		example
-            </div>
-        `);
-    }
-
+  constructor() {
+    super(`
+      <style>
+        @import '/node_modules/vl-ui-example/dist/style.css';
+        @import '/node_modules/vl-ui-example/dist/style.css';
+        @import '/node_modules/vl-ui-dependency/dist/style.css';
+        @import "/node_modules/vl-ui-dependency/dist/style.css";
+      </style>
+      <div>
+        example
+      </div>
+    `);
+  }
 }

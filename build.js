@@ -95,7 +95,7 @@ class WebComponentBuild {
 	}
 
 	__maakVlSrcImportsAbsoluut(file) {
-		replace(`from ${quoted('/src/vl-(.*)')}`, `from '/node_modules/vl-ui-${this.webcomponent}/dist/vl-\\$1'`, file);
+		replace(`${quoted('/src/vl-(.*)')}`, `'/node_modules/vl-ui-${this.webcomponent}/dist/vl-\\$1'`, file);
 	}
 
 	__maakSrcImportsAbsoluut(file) {
@@ -123,7 +123,7 @@ class WebComponentBuild {
 	}
 
 	__vervangLocalVlSrcImportsDoorRelatieveImports(file) {
-		replace(`from ${quoted('/src/vl-(.*)')}`, `from 'vl-ui-${this.webcomponent}/dist/vl-\\$1'`, file);
+		replace(`${quoted('/src/vl-(.*).js')}`, `'vl-ui-${this.webcomponent}/dist/vl-\\$1.src.js'`, file);
 	}
 
 	__vervangLocalSrcImportsDoorRelatieveImports(file) {
