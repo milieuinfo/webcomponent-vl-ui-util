@@ -65,7 +65,7 @@
     "replace": "1.2.0",
     "sass": "1.26.5",
     "selenium-webdriver": "4.0.0-alpha.7",
-    "sinon": "7.5.0",
+    "sinon": "9.0.2",
     "wct-browser-legacy": "1.0.2",
     "web-component-tester": "6.9.2",
     "yaml": "1.9.2",
