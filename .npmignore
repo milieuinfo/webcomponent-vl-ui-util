@@ -9,6 +9,5 @@ test/
 !test/e2e/components/
 sass_cache/
 .dockerignore
-.mocharc.js
 renovate.json
 CODE_OWNERS
