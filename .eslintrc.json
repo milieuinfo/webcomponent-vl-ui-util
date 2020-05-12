@@ -13,6 +13,7 @@
     },
     "ignorePatterns": [
       "**/node_modules",
+      "**/sitespeed-result",
       "CODEOWNERS",
       "*.yml",
       "*.md",
@@ -34,7 +35,7 @@
     ],
     "rules": {
       "require-jsdoc": "off",
-      "max-len": "warn"
+      "max-len": "off"
     }
   }
   
