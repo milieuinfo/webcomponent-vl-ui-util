@@ -55,7 +55,7 @@
     "chai": "4.2.0",
     "chai-as-promised": "7.1.1",
     "chromedriver": "80.0.2",
-    "eslint": "6.8.0",
+    "eslint": "7.0.0",
     "eslint-config-google": "0.14.0",
     "eslint-plugin-html": "6.0.2",
     "event-stream": "^4.0.1",
