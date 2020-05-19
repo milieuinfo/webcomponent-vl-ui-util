@@ -10,18 +10,17 @@ import { analytics } from 'vl-ui-example/src/non-vl.js';
 import { dependency } from 'vl-ui-example/src/non-vl-2.js';
 
 export class VlExample extends VlElement(HTMLElement) {
-    constructor() {
-        super(`
-            <style>
+  constructor() {
+    super(`
+      <style>
 .example{color: black;}
 .example{color: black;}
 .dependency{color: red;}
 .dependency{color: red;}
-            </style>
-            <div>
-        		example
-            </div>
-        `);
-    }
-
+      </style>
+      <div>
+        example
+      </div>
+    `);
+  }
 }

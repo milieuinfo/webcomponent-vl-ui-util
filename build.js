@@ -56,11 +56,11 @@ class WebComponentBuild {
 	__buildEs6Min(file) {
 		const es6MinBuildFile = `${this.distFolder}/${fileNameWithoutExtension(file)}.min.js`;
 		copy(file, es6MinBuildFile);
-		this.__vervangWebcomponentenImportsDoorMinifiedImports(es6MinBuildFile);
 		this.__vervangGovFlandersImportsDoorMinifiedImports(es6MinBuildFile);
 		this.__maakLibImportsAbsoluut(es6MinBuildFile);
 		this.__maakVlSrcImportsAbsoluut(es6MinBuildFile);
 		this.__maakSrcImportsAbsoluut(es6MinBuildFile);
+		this.__vervangWebcomponentenImportsDoorMinifiedImports(es6MinBuildFile);
 		this.__inlineCss(es6MinBuildFile);
 		this.__minify(es6MinBuildFile);
 	}
@@ -95,15 +95,15 @@ class WebComponentBuild {
 	}
 
 	__maakVlSrcImportsAbsoluut(file) {
-		replace(`from ${quoted('/src/vl-(.*)')}`, `from '/node_modules/vl-ui-${this.webcomponent}/dist/vl-\\$1'`, file);
+		replace(`${quoted('/src/vl-(.*)')}`, `'/node_modules/vl-ui-${this.webcomponent}/dist/vl-\\$1'`, file);
 	}
 
 	__maakSrcImportsAbsoluut(file) {
-		replace(`from ${quoted('/src/(.*)')}`, `from '/node_modules/vl-ui-${this.webcomponent}/src/\\$1'`, file);
+		replace(`${quoted('/src/((?!vl-)(.*)).js')}`, `'/node_modules/vl-ui-${this.webcomponent}/src/\\$1.js'`, file);
 	}
 
 	__vervangWebcomponentenImportsDoorMinifiedImports(file) {
-		replace(`${quoted('/node_modules/vl-ui-(.*)/dist/vl-(.*).js')}`, `'/node_modules/vl-ui-\\$1/dist/vl-\\$1.min.js'`, file);
+		replace(`${quoted('/node_modules/vl-ui-(.*)/dist/vl-(.*).js')}`, `'/node_modules/vl-ui-\\$1/dist/vl-\\$2.min.js'`, file);
 	}
 
 	__vervangGovFlandersImportsDoorMinifiedImports(file) {
@@ -123,7 +123,7 @@ class WebComponentBuild {
 	}
 
 	__vervangLocalVlSrcImportsDoorRelatieveImports(file) {
-		replace(`from ${quoted('/src/vl-(.*)')}`, `from 'vl-ui-${this.webcomponent}/dist/vl-\\$1'`, file);
+		replace(`${quoted('/src/vl-(.*).js')}`, `'vl-ui-${this.webcomponent}/dist/vl-\\$1.src.js'`, file);
 	}
 
 	__vervangLocalSrcImportsDoorRelatieveImports(file) {
