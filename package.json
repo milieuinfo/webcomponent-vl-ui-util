@@ -59,6 +59,7 @@
     "geckodriver": "1.19.1",
     "http-server": "0.12.3",
     "jsdom": "16.2.2",
+    "luxon": "^1.24.1",
     "minify": "^5.1.1",
     "mocha": "^7.1.0",
     "np": "6.2.3",
