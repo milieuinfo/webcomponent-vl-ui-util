@@ -1,6 +1,6 @@
 {
   "name": "vl-ui-util",
-  "version": "5.1.9",
+  "version": "5.1.10",
   "description": "De util verzamelt verschillende handige webcomponent scripts.",
   "main": "index.js",
   "author": "DIDM",
@@ -55,15 +55,16 @@
   "dependencies": {
     "chai": "4.2.0",
     "chai-as-promised": "7.1.1",
-    "chromedriver": "81.0.0",
     "eslint": "7.0.0",
     "eslint-config-google": "0.14.0",
     "eslint-plugin-html": "6.0.2",
+    "chromedriver": "83.0.0",
     "event-stream": "^4.0.1",
     "fetch-mock": "^9.0.0",
     "geckodriver": "1.19.1",
     "http-server": "0.12.3",
     "jsdom": "16.2.2",
+    "luxon": "^1.24.1",
     "minify": "^5.1.1",
     "mocha": "^7.1.0",
     "np": "6.2.3",
@@ -78,7 +79,8 @@
     "yargs": "15.3.1"
   },
   "devDependencies": {
-    "copyfiles": "2.2.0",
+    "copyfiles": "2.3.0",
+    "eslint": "^6.3.0",
     "octonode": "^0.9.5"
   }
 }
