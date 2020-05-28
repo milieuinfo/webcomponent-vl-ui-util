@@ -17,7 +17,7 @@
     "script-shell": "bash"
   },
   "scripts": {
-    "format": "eslint ./../../ --ext .js --ext .html -c .eslintrc.json --fix",
+    "format": "eslint ./../../ --ext .js --ext .html -c .eslintrc.json --fix --quiet",
     "util": "npm run install:sass && npm run install:copy && npm run install:css:minify && npm run install:fonts && npm run install:bamboo && npm run install:copy:github && npm run update:readme && npm run format",
     "install:utils": "npm run install:bamboo && npm run install:copy:install && npm run install:copy:codeowner && npm run install:copy:github",
     "install:bamboo": "node ./bamboo/bamboo-spec.js",
