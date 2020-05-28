@@ -32,7 +32,8 @@
       "sourceType": "module"
     },
     "plugins": [
-        "eslint-plugin-html"
+        "eslint-plugin-html",
+        "only-warn"
     ],
     "rules": {
       "require-jsdoc": "off",
