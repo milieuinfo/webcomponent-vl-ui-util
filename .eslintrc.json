@@ -33,12 +33,10 @@
       "sourceType": "module"
     },
     "plugins": [
-        "eslint-plugin-html",
-        "only-warn"
+        "eslint-plugin-html"
     ],
     "rules": {
-      "require-jsdoc": "off",
-      "max-len": "off"
+      "require-jsdoc": "off"
     }
   }
   
