@@ -15,6 +15,7 @@
       "**/node_modules",
       "**/sitespeed-result",
       "**/dist",
+      "**/lib",
       "CODEOWNERS",
       "*.yml",
       "*.md",
