@@ -1,11 +1,12 @@
-import { VlElement, define } from 'vl-ui-core';
+/* eslint-disable no-unused-vars */
+import {vlElement, define} from 'vl-ui-core';
 import '@govflanders/vl-ui-util/dist/js/util.js';
 import 'vl-ui-example/lib/external-library.js';
 import 'https://prod.widgets.burgerprofiel.vlaanderen.be/api/v1/node_modules/@govflanders/vl-widget-polyfill/dist/index.js';
 import 'vl-ui-button';
-import { analytics } from 'vl-ui-example/src/non-vl.js';
+import {analytics} from 'vl-ui-example/src/non-vl.js';
 
-export class VlExampleOther extends VlElement(HTMLElement) {
+export class VlExampleOther extends vlElement(HTMLElement) {
   constructor() {
     super(`
       <style>
@@ -20,3 +21,4 @@ export class VlExampleOther extends VlElement(HTMLElement) {
     `);
   }
 }
+
