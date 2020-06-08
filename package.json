@@ -72,7 +72,8 @@
     "wct-browser-legacy": "^1.0.2",
     "web-component-tester": "^6.9.2",
     "yaml": "^1.10.0",
-    "yargs": "^15.3.1"
+    "yargs": "^15.3.1",
+    "terser": "4.0.0"
   },
   "devDependencies": {
     "copyfiles": "2.3.0",
