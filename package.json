@@ -68,7 +68,7 @@
     "sass": "^1.26.7",
     "selenium-webdriver": "^4.0.0-alpha.7",
     "sinon": "^9.0.2",
-    "vl-ui-demo": "^1.0.0",
+    "vl-ui-demo": "^1.1.0",
     "wct-browser-legacy": "^1.0.2",
     "web-component-tester": "^6.9.2",
     "yaml": "^1.10.0",
