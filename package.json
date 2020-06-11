@@ -37,7 +37,7 @@
     "install:font:path-sans": "replace 'https://ui.vlaanderen.be/assets/fonts/sans/FlandersArtSans' 'https://cdn.milieuinfo.be/vlaanderen-font/LATEST/font/flandersart/FlandersArtSans' ../../src/style.css",
     "install:font:path-serif": "replace 'https://ui.vlaanderen.be/assets/fonts/serif/FlandersArtSerif' 'https://cdn.milieuinfo.be/vlaanderen-font/LATEST/font/flandersart/FlandersArtSerif' ../../src/style.css",
     "install:font:path-italic": "replace 'https://ui.vlaanderen.be/assets/fonts/italic/FlandersArtSans' 'https://cdn.milieuinfo.be/vlaanderen-font/LATEST/font/flandersart/FlandersArtSansItalic' ../../src/style.css",
-    "install:font:vlaanderen-icon": "replace '/font/iconfont/vlaanderen-icon.woff' 'https://cdn.milieuinfo.be/vlaanderen-font/LATEST/font/iconfont/3.9.1/vlaanderen-icon.woff' ../../src/style.css",
+    "install:font:vlaanderen-icon": "replace '/font/iconfont/vlaanderen-icon.woff' 'https://cdn.milieuinfo.be/vlaanderen-font/LATEST/font/iconfont/3.9.2/vlaanderen-icon.woff' ../../src/style.css",
     "pretest": "node build test/single/example example no-commit && node build test/multiple/example example no-commit ",
     "test": "mocha",
     "update:readme": "bash ./scripts/updateReadme.sh",
