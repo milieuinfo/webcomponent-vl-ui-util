@@ -2,6 +2,7 @@ const execSync = require('child_process').execSync;
 const argv = require('yargs').argv;
 const fs = require('fs');
 const path = require('path');
+const replace = require('replace');
 const basePath = argv._[0];
 const webcomponent = argv._[1];
 const noCommit = argv._[2] == 'no-commit';
@@ -77,7 +78,7 @@ class WebComponentBuild {
   }
 
   __inlineCss(file) {
-    executeCommand(`npm run explode -- --file=${file} --basePath=${this.path}`);
+    executeCommand(`node ${__dirname}/exploder.js --file=${file} --basePath=${this.path}`);
   }
 
   __minify(file) {
@@ -87,47 +88,47 @@ class WebComponentBuild {
   }
 
   __maakStyleImportAbsoluutNaarDist(file) {
-    replace(`${quoted('/src/style.css')}`, `'/node_modules/vl-ui-${this.webcomponent}/dist/style.css'`, file);
+    replaceInFile(`${quoted('/src/style.css')}`, `'/node_modules/vl-ui-${this.webcomponent}/dist/style.css'`, file);
   }
 
   __maakLibImportsAbsoluut(file) {
-    replace(`import ${quoted('/lib/(.*)')}`, `import '/node_modules/vl-ui-${this.webcomponent}/lib/\\$1'`, file);
+    replaceInFile(`import ${quoted('/lib/(.*)')}`, `import '/node_modules/vl-ui-${this.webcomponent}/lib/$1'`, file);
   }
 
   __maakVlSrcImportsAbsoluut(file) {
-    replace(`${quoted('/src/vl-(.*)')}`, `'/node_modules/vl-ui-${this.webcomponent}/dist/vl-\\$1'`, file);
+    replaceInFile(`${quoted('/src/vl-(.*)')}`, `'/node_modules/vl-ui-${this.webcomponent}/dist/vl-$1'`, file);
   }
 
   __maakSrcImportsAbsoluut(file) {
-    replace(`${quoted('/src/((?!vl-)(.*)).js')}`, `'/node_modules/vl-ui-${this.webcomponent}/src/\\$1.js'`, file);
+    replaceInFile(`${quoted('/src/((?!vl-)(.*)).js')}`, `'/node_modules/vl-ui-${this.webcomponent}/src/$1.js'`, file);
   }
 
   __vervangWebcomponentenImportsDoorMinifiedImports(file) {
-    replace(`${quoted('/node_modules/vl-ui-(.*)/dist/vl-(.*).js')}`, `'/node_modules/vl-ui-\\$1/dist/vl-\\$2.min.js'`, file);
+    replaceInFile(`${quoted('/node_modules/vl-ui-(.*)/dist/vl-(.*).js')}`, `'/node_modules/vl-ui-$1/dist/vl-$2.min.js'`, file);
   }
 
   __vervangGovFlandersImportsDoorMinifiedImports(file) {
-    replace(`${quoted('/node_modules/@govflanders/(.*).js')}`, `'/node_modules/@govflanders/\\$1.min.js'`, file);
+    replaceInFile(`${quoted('/node_modules/@govflanders/(.*).js')}`, `'/node_modules/@govflanders/$1.min.js'`, file);
   }
 
   __vervangWebcomponentenImportsDoorRelatieveImports(file) {
-    replace(`${quoted('/node_modules/vl-ui-(.*)/dist/vl-(.*).js')}`, `'vl-ui-\\$1'`, file);
+    replaceInFile(`${quoted('/node_modules/vl-ui-(.*)/dist/vl-(.*).js')}`, `'vl-ui-$1'`, file);
   }
 
   __vervangThirdPartyImportsDoorRelatieveImports(file) {
-    replace(`${quoted('/node_modules/(.+\\.js)')}`, `'\\$1'`, file);
+    replaceInFile(`${quoted('/node_modules/(.+\\.js)')}`, `'$1'`, file);
   }
 
   __vervangLocalLibImportsDoorRelatieveImports(file) {
-    replace(`import ${quoted('/lib/(.*)')}`, `import 'vl-ui-${this.webcomponent}/lib/\\$1'`, file);
+    replaceInFile(`import ${quoted('/lib/(.*)')}`, `import 'vl-ui-${this.webcomponent}/lib/$1'`, file);
   }
 
   __vervangLocalVlSrcImportsDoorRelatieveImports(file) {
-    replace(`${quoted('/src/vl-(.*).js')}`, `'vl-ui-${this.webcomponent}/dist/vl-\\$1.src.js'`, file);
+    replaceInFile(`${quoted('/src/vl-(.*).js')}`, `'vl-ui-${this.webcomponent}/dist/vl-$1.src.js'`, file);
   }
 
   __vervangLocalSrcImportsDoorRelatieveImports(file) {
-    replace(`from ${quoted('/src/(.*)')}`, `from 'vl-ui-${this.webcomponent}/src/\\$1'`, file);
+    replaceInFile(`from ${quoted('/src/(.*)')}`, `from 'vl-ui-${this.webcomponent}/src/$1'`, file);
   }
 
   __commit() {
@@ -144,12 +145,15 @@ function executeCommand(script) {
   execSync(script, {stdio: 'inherit'});
 }
 
-function replace(search, replacement, file) {
-  executeCommand(`replace "${search}" "${replacement}" ${file}`);
+function replaceInFile(search, replacement, file) {
+  replace({
+    regex: search,
+    replacement: replacement,
+    paths: [file],
+  });
 }
 
 function copy(srcFile, destFile) {
-  console.log(`Copying ${srcFile} to ${destFile}`);
   fs.copyFileSync(srcFile, destFile);
 }
 
