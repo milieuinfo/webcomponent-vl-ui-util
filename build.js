@@ -19,11 +19,14 @@ class WebComponentBuild {
   execute() {
     this.__cleanDistFolder();
     this.__copyNonVlSrcToDist();
-    Promise.all(fs.readdirSync(this.srcFolder).map((file) => {
+    const builds = fs.readdirSync(this.srcFolder).map((file) => {
       if (file.startsWith('vl-')) {
         return this.__build(path.resolve(this.srcFolder, file));
+      } else {
+        return Promise.resolve();
       }
-    })).then(() => {
+    });
+    return Promise.all(builds).then(() => {
       if (!noCommit) {
         this.__commit();
       }
@@ -54,6 +57,7 @@ class WebComponentBuild {
     this.__maakLibImportsAbsoluut(es6BuildFile);
     this.__maakVlSrcImportsAbsoluut(es6BuildFile);
     this.__maakSrcImportsAbsoluut(es6BuildFile);
+    return Promise.resolve();
   }
 
   async __buildEs6Min(file) {
@@ -77,6 +81,7 @@ class WebComponentBuild {
     this.__vervangLocalVlSrcImportsDoorRelatieveImports(nodeBuildFile);
     this.__vervangLocalSrcImportsDoorRelatieveImports(nodeBuildFile);
     this.__inlineCss(nodeBuildFile);
+    return Promise.resolve();
   }
 
   __inlineCss(file) {
@@ -84,13 +89,8 @@ class WebComponentBuild {
   }
 
   async __minify(file) {
-    const tmpFile = `${file}.tmp`;
-    await minify(file).then((result) => {
-      console.log(result);
-      console.log('----');
-      console.log(`echo '${result}' > ${tmpFile} && cp ${tmpFile} ${file} && rm -rf ${tmpFile}`);
-      executeCommand(`echo '${result}' > ${tmpFile} && cp ${tmpFile} ${file} && rm -rf ${tmpFile}`);
-    });
+    const output = await minify(file);
+    fs.writeFileSync(file, output);
   }
 
   __maakStyleImportAbsoluutNaarDist(file) {
@@ -185,4 +185,4 @@ function fileNameWithoutExtension(file) {
   return path.parse(path.basename(file)).name;
 }
 
-new WebComponentBuild(basePath, webcomponent).execute();
+return new WebComponentBuild(basePath, webcomponent).execute();
