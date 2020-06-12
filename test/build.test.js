@@ -5,10 +5,8 @@ const path = require('path');
 
 describe('vl-util build', () => {
   before(async () => {
-    console.log(`node ${path.resolve(__dirname, '../')}/build ${__dirname}/single/example example no-commit`);
-    console.log(`node ${path.resolve(__dirname, '../')}/build ${__dirname}/multiple/exampleexample no-commit`);
     await new Promise((resolve) => exec(`node ${path.resolve(__dirname, '../')}/build ${__dirname}/single/example example no-commit`, () => resolve()));
-    await new Promise((resolve) => exec(`node ${path.resolve(__dirname, '../')}/build ${__dirname}/multiple/exampleexample no-commit`, () => resolve()));
+    await new Promise((resolve) => exec(`node ${path.resolve(__dirname, '../')}/build ${__dirname}/multiple/example example no-commit`, () => resolve()));
   });
 
   const assertDatDeInhoudVanDeDistFolderOvereenkomtMetDeExpectedFolder = (distFolder, expectedFolder) => {
