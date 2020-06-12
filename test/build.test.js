@@ -1,7 +1,14 @@
 const assert = require('chai').assert;
 const fs = require('fs');
+const {exec} = require('child_process');
+const path = require('path');
 
-describe('vl-util build', function() {
+describe('vl-util build', () => {
+  before(async () => {
+    await new Promise((resolve) => exec(`node ${path.resolve(__dirname, '../')}/build ${__dirname}/single/example example no-commit`, () => resolve()));
+    await new Promise((resolve) => exec(`node ${path.resolve(__dirname, '../')}/build ${__dirname}/multiple/example example no-commit`, () => resolve()));
+  });
+
   const assertDatDeInhoudVanDeDistFolderOvereenkomtMetDeExpectedFolder = (distFolder, expectedFolder) => {
     fs.readdir(expectedFolder, function(err, expectedFiles) {
       fs.readdir(distFolder, function(err, files) {
@@ -16,8 +23,8 @@ describe('vl-util build', function() {
   };
 
   describe('single', function() {
-    const distFolderSingle = 'test/single/example/dist/';
-    const expectedFolderSingle = 'test/single/expected/';
+    const distFolderSingle = __dirname + '/single/example/dist/';
+    const expectedFolderSingle = __dirname + '/single/expected/';
 
     it('de inhoud van de gebuilde dist folder komt overeen met de inhoud van de verwachte folder', function() {
       assertDatDeInhoudVanDeDistFolderOvereenkomtMetDeExpectedFolder(distFolderSingle, expectedFolderSingle);
@@ -25,8 +32,8 @@ describe('vl-util build', function() {
   });
 
   describe('multiple', function() {
-    const distFolderMultiple = 'test/multiple/example/dist/';
-    const expectedFolderMultiple = 'test/multiple/expected/';
+    const distFolderMultiple = __dirname + '/multiple/example/dist/';
+    const expectedFolderMultiple = __dirname + '/multiple/expected/';
 
     it('de inhoud van de gebuilde dist folder komt overeen met de inhoud van de verwachte folder', function() {
       assertDatDeInhoudVanDeDistFolderOvereenkomtMetDeExpectedFolder(distFolderMultiple, expectedFolderMultiple);

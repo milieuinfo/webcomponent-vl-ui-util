@@ -2,6 +2,8 @@ const execSync = require('child_process').execSync;
 const argv = require('yargs').argv;
 const fs = require('fs');
 const path = require('path');
+const replace = require('replace');
+const minify = require('minify');
 const basePath = argv._[0];
 const webcomponent = argv._[1];
 const noCommit = argv._[2] == 'no-commit';
@@ -17,14 +19,18 @@ class WebComponentBuild {
   execute() {
     this.__cleanDistFolder();
     this.__copyNonVlSrcToDist();
-    fs.readdirSync(this.srcFolder).forEach((file) => {
+    const builds = fs.readdirSync(this.srcFolder).map((file) => {
       if (file.startsWith('vl-')) {
-        this.__build(path.resolve(this.srcFolder, file));
+        return this.__build(path.resolve(this.srcFolder, file));
+      } else {
+        return Promise.resolve();
       }
     });
-    if (!noCommit) {
-      this.__commit();
-    }
+    return Promise.all(builds).then(() => {
+      if (!noCommit) {
+        this.__commit();
+      }
+    });
   }
 
   __cleanDistFolder() {
@@ -38,9 +44,9 @@ class WebComponentBuild {
     copyFilesTo(this.srcFolder, this.distFolder, (file) => !file.startsWith('vl-'));
   }
 
-  __build(file) {
+  async __build(file) {
     this.__buildEs6(file);
-    this.__buildEs6Min(file);
+    await this.__buildEs6Min(file);
     this.__buildNode(file);
   }
 
@@ -53,7 +59,7 @@ class WebComponentBuild {
     this.__maakSrcImportsAbsoluut(es6BuildFile);
   }
 
-  __buildEs6Min(file) {
+  async __buildEs6Min(file) {
     const es6MinBuildFile = `${this.distFolder}/${fileNameWithoutExtension(file)}.min.js`;
     copy(file, es6MinBuildFile);
     this.__vervangGovFlandersImportsDoorMinifiedImports(es6MinBuildFile);
@@ -62,7 +68,7 @@ class WebComponentBuild {
     this.__maakSrcImportsAbsoluut(es6MinBuildFile);
     this.__vervangWebcomponentenImportsDoorMinifiedImports(es6MinBuildFile);
     this.__inlineCss(es6MinBuildFile);
-    this.__minify(es6MinBuildFile);
+    await this.__minify(es6MinBuildFile);
   }
 
   __buildNode(file) {
@@ -77,57 +83,56 @@ class WebComponentBuild {
   }
 
   __inlineCss(file) {
-    executeCommand(`npm run explode -- --file=${file} --basePath=${this.path}`);
+    executeCommand(`node ${__dirname}/exploder.js --file=${file} --basePath=${this.path}`);
   }
 
-  __minify(file) {
-    const tmpFile = `${file}.tmp`;
-    const script = `minify ${file} > ${tmpFile} && cp ${tmpFile} ${file} && rm -rf ${tmpFile}`;
-    executeCommand(script);
+  async __minify(file) {
+    const output = await minify(file);
+    fs.writeFileSync(file, output);
   }
 
   __maakStyleImportAbsoluutNaarDist(file) {
-    replace(`${quoted('/src/style.css')}`, `'/node_modules/vl-ui-${this.webcomponent}/dist/style.css'`, file);
+    replaceInFile(`${quoted('/src/style.css')}`, `'/node_modules/vl-ui-${this.webcomponent}/dist/style.css'`, file);
   }
 
   __maakLibImportsAbsoluut(file) {
-    replace(`import ${quoted('/lib/(.*)')}`, `import '/node_modules/vl-ui-${this.webcomponent}/lib/\\$1'`, file);
+    replaceInFile(`import ${quoted('/lib/(.*)')}`, `import '/node_modules/vl-ui-${this.webcomponent}/lib/$1'`, file);
   }
 
   __maakVlSrcImportsAbsoluut(file) {
-    replace(`${quoted('/src/vl-(.*)')}`, `'/node_modules/vl-ui-${this.webcomponent}/dist/vl-\\$1'`, file);
+    replaceInFile(`${quoted('/src/vl-(.*)')}`, `'/node_modules/vl-ui-${this.webcomponent}/dist/vl-$1'`, file);
   }
 
   __maakSrcImportsAbsoluut(file) {
-    replace(`${quoted('/src/((?!vl-)(.*)).js')}`, `'/node_modules/vl-ui-${this.webcomponent}/src/\\$1.js'`, file);
+    replaceInFile(`${quoted('/src/((?!vl-)(.*)).js')}`, `'/node_modules/vl-ui-${this.webcomponent}/src/$1.js'`, file);
   }
 
   __vervangWebcomponentenImportsDoorMinifiedImports(file) {
-    replace(`${quoted('/node_modules/vl-ui-(.*)/dist/vl-(.*).js')}`, `'/node_modules/vl-ui-\\$1/dist/vl-\\$2.min.js'`, file);
+    replaceInFile(`${quoted('/node_modules/vl-ui-(.*)/dist/vl-(.*).js')}`, `'/node_modules/vl-ui-$1/dist/vl-$2.min.js'`, file);
   }
 
   __vervangGovFlandersImportsDoorMinifiedImports(file) {
-    replace(`${quoted('/node_modules/@govflanders/(.*).js')}`, `'/node_modules/@govflanders/\\$1.min.js'`, file);
+    replaceInFile(`${quoted('/node_modules/@govflanders/(.*).js')}`, `'/node_modules/@govflanders/$1.min.js'`, file);
   }
 
   __vervangWebcomponentenImportsDoorRelatieveImports(file) {
-    replace(`${quoted('/node_modules/vl-ui-(.*)/dist/vl-(.*).js')}`, `'vl-ui-\\$1'`, file);
+    replaceInFile(`${quoted('/node_modules/vl-ui-(.*)/dist/vl-(.*).js')}`, `'vl-ui-$1'`, file);
   }
 
   __vervangThirdPartyImportsDoorRelatieveImports(file) {
-    replace(`${quoted('/node_modules/(.+\\.js)')}`, `'\\$1'`, file);
+    replaceInFile(`${quoted('/node_modules/(.+\\.js)')}`, `'$1'`, file);
   }
 
   __vervangLocalLibImportsDoorRelatieveImports(file) {
-    replace(`import ${quoted('/lib/(.*)')}`, `import 'vl-ui-${this.webcomponent}/lib/\\$1'`, file);
+    replaceInFile(`import ${quoted('/lib/(.*)')}`, `import 'vl-ui-${this.webcomponent}/lib/$1'`, file);
   }
 
   __vervangLocalVlSrcImportsDoorRelatieveImports(file) {
-    replace(`${quoted('/src/vl-(.*).js')}`, `'vl-ui-${this.webcomponent}/dist/vl-\\$1.src.js'`, file);
+    replaceInFile(`${quoted('/src/vl-(.*).js')}`, `'vl-ui-${this.webcomponent}/dist/vl-$1.src.js'`, file);
   }
 
   __vervangLocalSrcImportsDoorRelatieveImports(file) {
-    replace(`from ${quoted('/src/(.*)')}`, `from 'vl-ui-${this.webcomponent}/src/\\$1'`, file);
+    replaceInFile(`from ${quoted('/src/(.*)')}`, `from 'vl-ui-${this.webcomponent}/src/$1'`, file);
   }
 
   __commit() {
@@ -144,12 +149,15 @@ function executeCommand(script) {
   execSync(script, {stdio: 'inherit'});
 }
 
-function replace(search, replacement, file) {
-  executeCommand(`replace "${search}" "${replacement}" ${file}`);
+function replaceInFile(search, replacement, file) {
+  replace({
+    regex: search,
+    replacement: replacement,
+    paths: [file],
+  });
 }
 
 function copy(srcFile, destFile) {
-  console.log(`Copying ${srcFile} to ${destFile}`);
   fs.copyFileSync(srcFile, destFile);
 }
 
