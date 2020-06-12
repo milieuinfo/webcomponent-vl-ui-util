@@ -3,6 +3,7 @@ const argv = require('yargs').argv;
 const fs = require('fs');
 const path = require('path');
 const replace = require('replace');
+const minify = require('minify');
 const basePath = argv._[0];
 const webcomponent = argv._[1];
 const noCommit = argv._[2] == 'no-commit';
@@ -18,14 +19,15 @@ class WebComponentBuild {
   execute() {
     this.__cleanDistFolder();
     this.__copyNonVlSrcToDist();
-    fs.readdirSync(this.srcFolder).forEach((file) => {
+    Promise.all(fs.readdirSync(this.srcFolder).map((file) => {
       if (file.startsWith('vl-')) {
-        this.__build(path.resolve(this.srcFolder, file));
+        return this.__build(path.resolve(this.srcFolder, file));
+      }
+    })).then(() => {
+      if (!noCommit) {
+        this.__commit();
       }
     });
-    if (!noCommit) {
-      this.__commit();
-    }
   }
 
   __cleanDistFolder() {
@@ -39,9 +41,9 @@ class WebComponentBuild {
     copyFilesTo(this.srcFolder, this.distFolder, (file) => !file.startsWith('vl-'));
   }
 
-  __build(file) {
+  async __build(file) {
     this.__buildEs6(file);
-    this.__buildEs6Min(file);
+    await this.__buildEs6Min(file);
     this.__buildNode(file);
   }
 
@@ -54,7 +56,7 @@ class WebComponentBuild {
     this.__maakSrcImportsAbsoluut(es6BuildFile);
   }
 
-  __buildEs6Min(file) {
+  async __buildEs6Min(file) {
     const es6MinBuildFile = `${this.distFolder}/${fileNameWithoutExtension(file)}.min.js`;
     copy(file, es6MinBuildFile);
     this.__vervangGovFlandersImportsDoorMinifiedImports(es6MinBuildFile);
@@ -63,7 +65,7 @@ class WebComponentBuild {
     this.__maakSrcImportsAbsoluut(es6MinBuildFile);
     this.__vervangWebcomponentenImportsDoorMinifiedImports(es6MinBuildFile);
     this.__inlineCss(es6MinBuildFile);
-    this.__minify(es6MinBuildFile);
+    await this.__minify(es6MinBuildFile);
   }
 
   __buildNode(file) {
@@ -81,10 +83,14 @@ class WebComponentBuild {
     executeCommand(`node ${__dirname}/exploder.js --file=${file} --basePath=${this.path}`);
   }
 
-  __minify(file) {
+  async __minify(file) {
     const tmpFile = `${file}.tmp`;
-    const script = `minify ${file} > ${tmpFile} && cp ${tmpFile} ${file} && rm -rf ${tmpFile}`;
-    executeCommand(script);
+    await minify(file).then((result) => {
+      console.log(result);
+      console.log('----');
+      console.log(`echo '${result}' > ${tmpFile} && cp ${tmpFile} ${file} && rm -rf ${tmpFile}`);
+      executeCommand(`echo '${result}' > ${tmpFile} && cp ${tmpFile} ${file} && rm -rf ${tmpFile}`);
+    });
   }
 
   __maakStyleImportAbsoluutNaarDist(file) {
