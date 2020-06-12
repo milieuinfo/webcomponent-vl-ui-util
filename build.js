@@ -57,7 +57,6 @@ class WebComponentBuild {
     this.__maakLibImportsAbsoluut(es6BuildFile);
     this.__maakVlSrcImportsAbsoluut(es6BuildFile);
     this.__maakSrcImportsAbsoluut(es6BuildFile);
-    return Promise.resolve();
   }
 
   async __buildEs6Min(file) {
@@ -81,7 +80,6 @@ class WebComponentBuild {
     this.__vervangLocalVlSrcImportsDoorRelatieveImports(nodeBuildFile);
     this.__vervangLocalSrcImportsDoorRelatieveImports(nodeBuildFile);
     this.__inlineCss(nodeBuildFile);
-    return Promise.resolve();
   }
 
   __inlineCss(file) {
@@ -185,4 +183,4 @@ function fileNameWithoutExtension(file) {
   return path.parse(path.basename(file)).name;
 }
 
-return new WebComponentBuild(basePath, webcomponent).execute();
+new WebComponentBuild(basePath, webcomponent).execute();
