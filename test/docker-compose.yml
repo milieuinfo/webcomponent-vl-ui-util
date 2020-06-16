@@ -30,7 +30,7 @@ services:
     shm_size: 2g
   tests:
     image: ${DOCKER_REGISTRY}node:13
-    command: bash -c "cp -R /data/. /workdir && npm install && npm run test:grid"
+    command: bash -c "apt-get update && apt-get install rsync -y && rsync -v -h -r --exclude 'node_modules' --exclude '.git' /data/. /workdir && npm install --verbose && npm run test:grid"
     depends_on:
       - selenium-hub
       - selenium-chrome
