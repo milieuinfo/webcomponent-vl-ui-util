@@ -50,7 +50,7 @@
     "test:component:e2e:firefox:grid": "mocha --firefox --grid",
     "test:component:e2e:opera": "mocha --opera",
     "test:component:e2e:safari": "mocha --safari",
-    "test:component:server:start": "http-server &",
+    "test:component:server:start": "http-server ../../ &",
     "update:readme": "bash ./scripts/updateReadme.sh",
     "release": "np",
     "release:prepare": "echo 2Fabiola for the bigger and bolder",
