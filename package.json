@@ -58,11 +58,11 @@
   "dependencies": {
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
+    "chromedriver": "^83.0.0",
     "eslint": "^7.0.0",
     "eslint-config-google": "^0.14.0",
-    "eslint-plugin-only-warn": "^1.0.2",
     "eslint-plugin-html": "^6.0.2",
-    "chromedriver": "^83.0.0",
+    "eslint-plugin-only-warn": "^1.0.2",
     "event-stream": "^4.0.1",
     "fetch-mock": "^9.0.0",
     "geckodriver": "^1.19.1",
@@ -76,11 +76,12 @@
     "sass": "^1.26.7",
     "selenium-webdriver": "^4.0.0-alpha.7",
     "sinon": "^9.0.2",
+    "terser": "4.0.0",
     "vl-ui-demo": "^1.1.1",
     "wct-browser-legacy": "^1.0.2",
     "web-component-tester": "^6.9.2",
     "yaml": "^1.10.0",
-    "terser": "4.0.0"
+    "yargs": "^15.3.1"
   },
   "devDependencies": {
     "copyfiles": "2.3.0",
