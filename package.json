@@ -39,6 +39,8 @@
     "install:utils": "npm run install:bamboo && npm run install:copy:install && npm run install:copy:codeowner && npm run install:copy:github",
     "release": "np",
     "release-component:prepare": "node build",
+    "release-component:release": "np --contents=../../",
+    "release-component:release:testless": "np --contents=../../ --yolo",
     "release:prepare": "echo 2Fabiola for the bigger and bolder",
     "release:testless": "np --yolo",
     "test": "mocha",
