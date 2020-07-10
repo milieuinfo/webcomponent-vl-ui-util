@@ -38,7 +38,7 @@
     "install:sass": "sass ../../src/style.scss ../../src/style.css --load-path ../../node_modules/@govflanders",
     "install:utils": "npm run install:bamboo && npm run install:copy:install && npm run install:copy:codeowner && npm run install:copy:github",
     "release": "np",
-    "release-component:prepare": "node ./scripts/checkDependencies.js && node build",
+    "release-component:prepare": "node ./scripts/checkDependencies.js && node ./scripts/build.js",
     "release:prepare": "echo 2Fabiola for the bigger and bolder",
     "release:testless": "np --yolo",
     "test": "mocha",
