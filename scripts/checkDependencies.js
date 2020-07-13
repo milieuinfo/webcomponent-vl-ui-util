@@ -5,7 +5,7 @@ const devDependencies = data.devDependencies;
 const peerDependencies = data.peerDependencies;
 
 const allDependencies = Object.assign(dependencies, devDependencies, peerDependencies);
-const regex = new RegExp('^\D?\d*\.\d*\.\d*$');
+const regex = /(\^|\~)?\d{1,3}\.\d{1,3}\.\d{1,3}/;
 let errors = 0;
 
 Object.entries(allDependencies).forEach(([dep, version]) => {
