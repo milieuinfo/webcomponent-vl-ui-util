@@ -68,6 +68,7 @@ class WebComponentBuild {
     this.__maakSrcImportsAbsoluut(es6MinBuildFile);
     this.__vervangWebcomponentenImportsDoorMinifiedImports(es6MinBuildFile);
     this.__inlineCss(es6MinBuildFile);
+    this.__maakStyleImportAbsoluutNaarDist(es6MinBuildFile);
     await this.__minify(es6MinBuildFile);
   }
 
@@ -80,6 +81,7 @@ class WebComponentBuild {
     this.__vervangLocalVlSrcImportsDoorRelatieveImports(nodeBuildFile);
     this.__vervangLocalSrcImportsDoorRelatieveImports(nodeBuildFile);
     this.__inlineCss(nodeBuildFile);
+    this.__maakStyleImportAbsoluutNaarDist(nodeBuildFile);
   }
 
   __inlineCss(file) {
