@@ -27,6 +27,7 @@ describe('vl-util build', () => {
     const expectedFolderSingle = __dirname + '/single/expected/';
 
     it('de inhoud van de gebuilde dist folder komt overeen met de inhoud van de verwachte folder', function() {
+      assert.isTrue(false);
       assertDatDeInhoudVanDeDistFolderOvereenkomtMetDeExpectedFolder(distFolderSingle, expectedFolderSingle);
     });
   });
