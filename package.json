@@ -42,6 +42,7 @@
     "release:prepare": "echo 2Fabiola for the bigger and bolder",
     "release:testless": "np --yolo",
     "test": "mocha --config .mocharc-util.js",
+    "test:grid": "npm run test",
     "test:component:server:start": "http-server ../../ &",
     "test:component": "npm run test:component:unit && npm run test:component:e2e",
     "test:component:grid": "npm run test:component:unit:grid && npm run test:component:e2e:grid",
