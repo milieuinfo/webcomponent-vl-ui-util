@@ -67,9 +67,9 @@ class WebComponentBuild {
     this.__maakVlSrcImportsAbsoluut(es6MinBuildFile);
     this.__maakSrcImportsAbsoluut(es6MinBuildFile);
     this.__vervangWebcomponentenImportsDoorMinifiedImports(es6MinBuildFile);
+    await this.__minify(es6MinBuildFile);
     this.__inlineCss(es6MinBuildFile);
     this.__maakStyleImportAbsoluutNaarDist(es6MinBuildFile);
-    await this.__minify(es6MinBuildFile);
   }
 
   __buildNode(file) {
