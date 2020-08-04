@@ -22,4 +22,10 @@ export class VlExample extends vlElement(HTMLElement) {
       </div>
     `);
   }
+
+  get style() {
+    return {
+      style: '/src/style.css',
+    };
+  }
 }

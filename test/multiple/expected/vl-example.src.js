@@ -22,5 +22,11 @@ export class VlExample extends vlElement(HTMLElement) {
       </div>
     `);
   }
+
+  get style() {
+    return {
+      style: '/node_modules/vl-ui-example/dist/style.css',
+    };
+  }
 }
 
