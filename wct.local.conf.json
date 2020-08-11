@@ -4,6 +4,9 @@
     "plugins": {
         "local": {
             "browsers": ["chrome", "firefox"]
+        },
+        "wct-junit-converter": {
+            "output": "./test-results/junit-testfile.xml"
         }
     },
     "suites": ["test/unit/*.test.html"]
