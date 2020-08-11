@@ -4,6 +4,9 @@
     "plugins": {
         "local": {
             "browsers": ["chrome", "firefox"]
+        },
+        "wct-xunit": {
+            
         }
     },
     "suites": ["test/unit/*.test.html"]
