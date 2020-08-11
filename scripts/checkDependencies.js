@@ -1,7 +1,7 @@
 const data = require('../../../package.json');
 
 class Dependencies {
-  execute() {
+  execute(data) {
     const dependencies = data.dependencies;
     const devDependencies = data.devDependencies;
     const peerDependencies = data.peerDependencies;
@@ -37,4 +37,4 @@ class Dependencies {
 
 module.exports = Dependencies;
 
-new Dependencies().execute();
+new Dependencies().execute(data);
