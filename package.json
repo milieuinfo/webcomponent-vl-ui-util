@@ -41,6 +41,7 @@
     "release-component:prepare": "node ./scripts/checkDependencies.js && node ./scripts/build.js",
     "release:prepare": "echo 2Fabiola for the bigger and bolder",
     "release:testless": "np --yolo",
+    "pretest:createfolder": "mkdir -p ../../test/results",
     "test": "mocha --config .mocharc-util.js",
     "test:grid": "mocha --config .mocharc-util.js --grid",
     "test:component:server:start": "http-server ../../ &",
