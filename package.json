@@ -79,7 +79,7 @@
     "simple-git": "^2.11.0",
     "sinon": "^9.0.2",
     "terser": "4.0.0",
-    "vl-ui-demo": "^1.1.1",
+    "vl-ui-demo": "milieuinfo/webcomponent-vl-ui-demo#code-preview",
     "wct-browser-legacy": "^1.0.2",
     "web-component-tester": "^6.9.2",
     "yaml": "^1.10.0",
