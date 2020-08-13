@@ -28,7 +28,7 @@
     "install:copy:gitignore": "cp ./templates/gitignore.template ../../ && mv ../../gitignore.template ../../.gitignore",
     "install:copy:dockerignore": "cp ./templates/dockerignore.template ../../ && mv ../../dockerignore.template ../../.dockerignore",
     "install:copy:release": "cp docker-compose-release.yml ../../",
-    "install:copy:test": "cp test/docker-compose.yml ../../test",
+    "install:copy:test": "cp ./test/docker-compose.yml ../../test",
     "install:copy:wct": "cp *.conf.json ../../",
     "install:css:minify": "minify ../../src/style.css > ../../src/style.min.css && cp ../../src/style.min.css ../../src/style.css && rm ../../src/style.min.css",
     "install:font:path-italic": "replace 'https://ui.vlaanderen.be/assets/fonts/italic/FlandersArtSans' 'https://cdn.milieuinfo.be/vlaanderen-font/LATEST/font/flandersart/FlandersArtSansItalic' ../../src/style.css",
