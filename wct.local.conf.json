@@ -6,7 +6,7 @@
             "browsers": ["chrome", "firefox"]
         },    
         "xunit-reporter": {
-            "output": "../../test/results/wct-results.xml"
+            "output": "../../test/wct-results.xml"
           }
     },
     "suites": ["test/unit/*.test.html"]
