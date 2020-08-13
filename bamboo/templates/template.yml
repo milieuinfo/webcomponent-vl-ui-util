@@ -31,11 +31,10 @@ Build:
   final-tasks:
     - script: 
         /opt/scripts/docker/stop-docker-containers.sh
-  artifacts:
-    - name: Test Reports
-      location: test
-      pattern: '*.xml'
-      required: true
+    - test-parser:
+        type: junit
+        test-results:
+          - test
   requirements:
     - REMOTE_ONLY
 
