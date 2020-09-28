@@ -24,9 +24,9 @@
     "install:copy:codeowner": "copyfiles CODEOWNERS ../../",
     "install:copy:eslint": "cp .eslintrc.json ../../",
     "install:copy:github": "cp -R .github ../../",
-    "install:copy:install": "npm i copyfiles@2.1.0 renamer@2.0.1 --save",
+    "install:copy:install": "npm i copyfiles@2.1.0 --save",
     "install:copy:npmignore": "copyfiles -a .npmignore ../../",
-    "install:copy:gitignore": "copyfiles -aVf ./templates/.gitignore.template ../../ && renamer --find .gitignore.template --replace .gitignore ../../* --force",
+    "install:copy:gitignore": "copyfiles -aVf ./templates/.gitignore.template ../../ && mv -f ../../.gitignore.template ../../.gitignore",
     "install:copy:release": "copyfiles -f docker-compose-release.yml ../../",
     "install:copy:test": "copyfiles -f test/docker-compose.yml ../../test",
     "install:copy:wct": "copyfiles *.conf.json ../../",
@@ -88,7 +88,6 @@
   },
   "devDependencies": {
     "copyfiles": "^2.3.0",
-    "octonode": "^0.9.5",
-    "renamer": "^2.0.1"
+    "octonode": "^0.9.5"
   }
 }
