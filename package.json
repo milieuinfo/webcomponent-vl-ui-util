@@ -26,7 +26,7 @@
     "install:copy:github": "cp -R .github ../../",
     "install:copy:install": "npm i copyfiles@2.1.0 renamer@2.0.1 --save",
     "install:copy:npmignore": "copyfiles -a .npmignore ../../",
-    "install:copy:gitignore": "copyfiles -a ./templates/.gitignore.template ../../../ && renamer --find .gitignore.template --replace .gitignore *",
+    "install:copy:gitignore": "copyfiles -aVf ./templates/.gitignore.template ../../../ && renamer --find .gitignore.template --replace .gitignore *",
     "install:copy:release": "copyfiles -f docker-compose-release.yml ../../",
     "install:copy:test": "copyfiles -f test/docker-compose.yml ../../test",
     "install:copy:wct": "copyfiles *.conf.json ../../",
