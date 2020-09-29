@@ -20,12 +20,13 @@
     "explode": "node exploder.js",
     "format": "eslint ./../../ --ext .js --ext .html -c .eslintrc.json",
     "install:bamboo": "node ./bamboo/bamboo-spec.js",
-    "install:copy": "npm run install:copy:install && npm run install:copy:test && npm run install:copy:release && npm run install:copy:codeowner && npm run install:copy:github && npm run install:copy:wct && npm run install:copy:npmignore && npm run install:copy:eslint",
+    "install:copy": "npm run install:copy:install && npm run install:copy:test && npm run install:copy:release && npm run install:copy:codeowner && npm run install:copy:github && npm run install:copy:wct && npm run install:copy:npmignore && npm run install:copy:gitignore && npm run install:copy:eslint",
     "install:copy:codeowner": "copyfiles CODEOWNERS ../../",
     "install:copy:eslint": "cp .eslintrc.json ../../",
     "install:copy:github": "cp -R .github ../../",
     "install:copy:install": "npm i copyfiles@2.1.0 --save",
     "install:copy:npmignore": "copyfiles -a .npmignore ../../",
+    "install:copy:gitignore": "copyfiles -aVf ./templates/.gitignore.template ../../ && mv -f ../../.gitignore.template ../../.gitignore",
     "install:copy:release": "copyfiles -f docker-compose-release.yml ../../",
     "install:copy:test": "copyfiles -f test/docker-compose.yml ../../test",
     "install:copy:wct": "copyfiles *.conf.json ../../",
@@ -53,7 +54,7 @@
     "test:component:e2e:grid": "npm run test:component:server:start && mocha --chrome --grid && mocha --firefox --grid",
     "test:component:e2e:grid:local": "mocha $npm_config_browser --grid",
     "posttest:component:e2e": "pkill -f http-server",
-    "update:readme": "bash ./scripts/updateReadme.sh",
+    "update:readme": "node ./scripts/updateReadme.js",
     "util": "npm run install:sass && npm run install:copy && npm run install:css:minify && npm run install:fonts && npm run install:bamboo && npm run install:copy:github && npm run update:readme && npm run format"
   },
   "dependencies": {
