@@ -9,7 +9,7 @@ set -e
 CWD=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 
 installJqDependency() {
-    which -s jq
+    which jq
     if [[ $? != 0 ]] ; then
         echo "Jq is not installed, please hang on while we install it for you ..."
         brew install jq
