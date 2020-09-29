@@ -20,16 +20,16 @@
     "explode": "node exploder.js",
     "format": "eslint ./../../ --ext .js --ext .html -c .eslintrc.json",
     "install:bamboo": "node ./bamboo/bamboo-spec.js",
-    "install:copy": "npm run install:copy:install && npm run install:copy:test && npm run install:copy:release && npm run install:copy:codeowner && npm run install:copy:github && npm run install:copy:wct && npm run install:copy:npmignore && npm run install:copy:gitignore && npm run install:copy:eslint",
-    "install:copy:codeowner": "copyfiles CODEOWNERS ../../",
+    "install:copy": "npm run install:copy:test && npm run install:copy:release && npm run install:copy:codeowner && npm run install:copy:github && npm run install:copy:wct && npm run install:copy:npmignore && npm run install:copy:gitignore && npm run install:copy:dockerignore && npm run install:copy:eslint",
+    "install:copy:codeowner": "cp CODEOWNERS ../../",
     "install:copy:eslint": "cp .eslintrc.json ../../",
-    "install:copy:github": "cp -R .github ../../",
-    "install:copy:install": "npm i copyfiles@2.1.0 --save",
-    "install:copy:npmignore": "copyfiles -a .npmignore ../../",
-    "install:copy:gitignore": "copyfiles -aVf ./templates/.gitignore.template ../../ && mv -f ../../.gitignore.template ../../.gitignore",
-    "install:copy:release": "copyfiles -f docker-compose-release.yml ../../",
-    "install:copy:test": "copyfiles -f test/docker-compose.yml ../../test",
-    "install:copy:wct": "copyfiles *.conf.json ../../",
+    "install:copy:github": "cp -r .github ../../",
+    "install:copy:npmignore": "cp ./templates/npmignore.template ../../ && mv ../../npmignore.template ../../.npmignore",
+    "install:copy:gitignore": "cp ./templates/gitignore.template ../../ && mv ../../gitignore.template ../../.gitignore",
+    "install:copy:dockerignore": "cp ./templates/dockerignore.template ../../ && mv ../../dockerignore.template ../../.dockerignore",
+    "install:copy:release": "cp docker-compose-release.yml ../../",
+    "install:copy:test": "cp ./test/docker-compose.yml ../../test",
+    "install:copy:wct": "cp *.conf.json ../../",
     "install:css:minify": "minify ../../src/style.css > ../../src/style.min.css && cp ../../src/style.min.css ../../src/style.css && rm ../../src/style.min.css",
     "install:font:path-italic": "replace 'https://ui.vlaanderen.be/assets/fonts/italic/FlandersArtSans' 'https://cdn.milieuinfo.be/vlaanderen-font/LATEST/font/flandersart/FlandersArtSansItalic' ../../src/style.css",
     "install:font:path-sans": "replace 'https://ui.vlaanderen.be/assets/fonts/sans/FlandersArtSans' 'https://cdn.milieuinfo.be/vlaanderen-font/LATEST/font/flandersart/FlandersArtSans' ../../src/style.css",
@@ -39,7 +39,7 @@
     "install:sass": "sass ../../src/style.scss ../../src/style.css --load-path ../../node_modules/@govflanders",
     "install:utils": "npm run install:bamboo && npm run install:copy:install && npm run install:copy:codeowner && npm run install:copy:github",
     "release": "np",
-    "release-component:prepare": "node build",
+    "release-component:prepare": "node ./scripts/checkDependencies.js && node ./scripts/build.js",
     "release:prepare": "echo 2Fabiola for the bigger and bolder",
     "release:testless": "np --yolo",
     "test": "mocha --config .mocharc-util.js",
@@ -54,7 +54,7 @@
     "test:component:e2e:grid": "npm run test:component:server:start && mocha --chrome --grid && mocha --firefox --grid",
     "test:component:e2e:grid:local": "mocha $npm_config_browser --grid",
     "posttest:component:e2e": "pkill -f http-server",
-    "update:readme": "node ./scripts/updateReadme.js",
+    "update:readme": "bash ./scripts/updateReadme.sh",
     "util": "npm run install:sass && npm run install:copy && npm run install:css:minify && npm run install:fonts && npm run install:bamboo && npm run install:copy:github && npm run update:readme && npm run format"
   },
   "dependencies": {
@@ -82,12 +82,13 @@
     "terser": "^5.0.0",
     "vl-ui-demo": "^1.2.2",
     "wct-browser-legacy": "^1.0.2",
+    "wct-xunit-reporter": "^1.0.2",
     "web-component-tester": "^6.9.2",
     "yaml": "^1.10.0",
     "yargs": "^15.4.1"
   },
   "devDependencies": {
-    "copyfiles": "^2.3.0",
+    "eslint": "^6.3.0",
     "octonode": "^0.9.5"
   }
 }
