@@ -60,7 +60,7 @@
   "dependencies": {
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
-    "chromedriver": "^84.0.1",
+    "chromedriver": "^85.0.0",
     "eslint": "^7.6.0",
     "eslint-config-google": "^0.14.0",
     "eslint-plugin-html": "^6.0.3",
