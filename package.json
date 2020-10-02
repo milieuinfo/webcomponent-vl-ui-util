@@ -85,7 +85,7 @@
     "wct-xunit-reporter": "^1.0.2",
     "web-component-tester": "^6.9.2",
     "yaml": "^1.10.0",
-    "yargs": "^15.4.1"
+    "yargs": "^16.0.0"
   },
   "devDependencies": {
     "eslint": "^6.3.0",
