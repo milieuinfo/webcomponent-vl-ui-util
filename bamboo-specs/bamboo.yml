@@ -27,7 +27,7 @@ Build:
     - script: |
         #!/usr/bin/env bash
         set -e
-        docker-compose up --exit-code-from tests
+        docker-compose up --force-recreate --exit-code-from tests
   final-tasks:
     - script: 
         /opt/scripts/docker/stop-docker-containers.sh
