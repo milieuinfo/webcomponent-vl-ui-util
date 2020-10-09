@@ -311,4 +311,4 @@ dist
 ## Custom
 test/single/example/dist/
 test/multiple/example/dist/
-*.xml
+test/*.xml
