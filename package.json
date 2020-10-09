@@ -54,7 +54,7 @@
     "test:component:e2e:grid": "npm run test:component:server:start && mocha --chrome --grid && mocha --firefox --grid",
     "test:component:e2e:grid:local": "mocha $npm_config_browser --grid",
     "posttest:component:e2e": "pkill -f http-server",
-    "update:readme": "bash ./scripts/updateReadme.js",
+    "update:readme": "node ./scripts/updateReadme.js",
     "util": "npm run install:sass && npm run install:copy && npm run install:css:minify && npm run install:fonts && npm run install:bamboo && npm run install:copy:github && npm run update:readme && npm run format"
   },
   "dependencies": {
