@@ -1,3 +1,6 @@
+const mock = require('mock-require');
+mock('../../../package.json', {request: () => { }});
+
 const Dependencies = require('../scripts/checkDependencies');
 const {assert, expect} = require('chai');
 
