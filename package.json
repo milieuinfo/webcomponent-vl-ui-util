@@ -17,7 +17,7 @@
     "script-shell": "bash"
   },
   "scripts": {
-    "explode": "node exploder.js",
+    "explode": "node scripts/exploder.js",
     "format": "eslint ./../../ --ext .js --ext .html -c .eslintrc.json",
     "install:bamboo": "node ./bamboo/bamboo-spec.js",
     "install:copy": "npm run install:copy:test && npm run install:copy:release && npm run install:copy:codeowner && npm run install:copy:github && npm run install:copy:wct && npm run install:copy:npmignore && npm run install:copy:gitignore && npm run install:copy:dockerignore && npm run install:copy:eslint",
@@ -58,6 +58,7 @@
     "util": "npm run install:sass && npm run install:copy && npm run install:css:minify && npm run install:fonts && npm run install:bamboo && npm run install:copy:github && npm run update:readme && npm run format"
   },
   "dependencies": {
+    "browserstack-local": "^1.4.8",
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
     "chromedriver": "^85.0.1",
