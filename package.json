@@ -17,7 +17,7 @@
     "script-shell": "bash"
   },
   "scripts": {
-    "explode": "node exploder.js",
+    "explode": "node scripts/exploder.js",
     "format": "eslint ./../../ --ext .js --ext .html -c .eslintrc.json",
     "install:bamboo": "node ./bamboo/bamboo-spec.js",
     "install:copy": "npm run install:copy:test && npm run install:copy:release && npm run install:copy:codeowner && npm run install:copy:github && npm run install:copy:wct && npm run install:copy:npmignore && npm run install:copy:gitignore && npm run install:copy:dockerignore && npm run install:copy:eslint",

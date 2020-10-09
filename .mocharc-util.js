@@ -1,6 +1,6 @@
 module.exports = {
     "full-trace": true,
-    "reporter": 'xunit',
+    "reporter": 'spec',
     "reporter-option": [
         'output=../../test/util-results.xml'
     ],
