@@ -1,7 +1,7 @@
 module.exports = {
     "full-trace": true,
     "reporter": 'mocha-multi-reporters',
-    "reporter-options": {
+    "reporter-option": {
         "configFile": 'reporter-config.json'
     },
     "spec": ["test/**/*.test.js"],
