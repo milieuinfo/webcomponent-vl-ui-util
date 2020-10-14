@@ -9,6 +9,8 @@ services:
       - no_proxy=${no_proxy}
       - HTTP_PROXY=${http_proxy}
       - HTTPS_PROXY=${https_proxy}
+      - SKIP_WCT_SAUCE_POSTINSTALL_DOWNLOAD
+      - NOSELENIUM
     extra_hosts:
       - "repository.milieuinfo.be:${REPOSITORY_FIXED_IP}"
     working_dir: /data
