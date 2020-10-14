@@ -2,7 +2,7 @@ version: "3"
 services:
   tests:
     image: ${DOCKER_REGISTRY}milieuinfo/ubuntu-node:14
-    command: bash -c "npm install && npm run test:grid"
+    command: bash -c "npm install && npm run test && tail -f /dev/null"
     environment:
       - http_proxy=${http_proxy}
       - https_proxy=${https_proxy}

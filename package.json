@@ -90,6 +90,7 @@
     "yargs": "^16.0.3"
   },
   "devDependencies": {
+    "mocha-junit-reporter": "^2.0.0",
     "octonode": "^0.9.5"
   }
 }
