@@ -32,9 +32,9 @@ Build:
     - script:
         /opt/scripts/docker/stop-docker-containers.sh
     - test-parser:
-      type: junit
-      test-results:
-        - test
+        type: junit
+        test-results:
+          - test
   requirements:
     - REMOTE_ONLY
 
