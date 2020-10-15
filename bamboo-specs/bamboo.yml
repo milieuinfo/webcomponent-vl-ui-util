@@ -29,8 +29,12 @@ Build:
         set -e
         docker-compose up --force-recreate --exit-code-from tests
   final-tasks:
-    - script: 
+    - script:
         /opt/scripts/docker/stop-docker-containers.sh
+    - test-parser:
+        type: junit
+        test-results:
+          - test
   requirements:
     - REMOTE_ONLY
 
@@ -46,7 +50,7 @@ Release:
         export release_version="${bamboo.release_version}"
         docker-compose -f docker-compose-release.yml run release
   final-tasks:
-    - script: 
+    - script:
         /opt/scripts/docker/stop-docker-containers.sh
   requirements:
     - REMOTE_ONLY
