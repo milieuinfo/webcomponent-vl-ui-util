@@ -84,7 +84,7 @@
     "terser": "^5.3.4",
     "vl-ui-demo": "^1.2.3",
     "wct-browser-legacy": "^1.0.2",
-    "wct-xunit-reporter": "^1.0.2",
+    "wct-junit-converter": "^1.0.3",
     "web-component-tester": "^6.9.2",
     "yaml": "^1.10.0",
     "yargs": "^16.0.3"

@@ -3,12 +3,13 @@
     "npm": true,
     "plugins": {
         "local": {
-            "browsers": ["chrome", "firefox"]
-        },    
-        "xunit-reporter": {
-            "output": "../../test/wct-results.xml"
-          }
+            "browsers": [
+                "chrome",
+                "firefox"
+            ]
+        }
     },
-    "suites": ["test/unit/*.test.html"]
-  }
-  
+    "suites": [
+        "test/unit/*.test.html"
+    ]
+}
