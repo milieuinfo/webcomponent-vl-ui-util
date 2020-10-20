@@ -14,8 +14,11 @@
   "plugins": {
     "local": false,
     "sauce": false,
-    "wct-junit-converter": {
-      "output": "../../test/wct-results.xml"
+    "junit-reporter": {
+      "options": {
+        "path": "../../test/",
+        "name": "wct-results.xml"
+      }    
     }
   },
   "suites": [
