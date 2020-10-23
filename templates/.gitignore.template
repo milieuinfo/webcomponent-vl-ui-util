@@ -369,5 +369,8 @@ $RECYCLE.BIN/
 
 .sass-cache/
 
+### Custom ###
+./test/**/*.xml
+
 # End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,intellij,eclipse,osx,windows,linux,node,sass
 
