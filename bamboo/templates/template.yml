@@ -34,7 +34,7 @@ Build:
     - test-parser:
         type: junit
         test-results:
-          - test
+          - test/**
   requirements:
     - REMOTE_ONLY
 
