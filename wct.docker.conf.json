@@ -15,7 +15,7 @@
       "local": false,
       "sauce": false,    
       "wct-junit": {
-          "outputDir": "../../test/wct/"
+          "outputDir": "../../test/"
         }
     },
     "suites": ["test/unit/*.test.html"],
