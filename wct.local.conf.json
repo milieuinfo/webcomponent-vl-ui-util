@@ -6,7 +6,7 @@
       "browsers": ["chrome", "firefox"]
     },
     "wct-junit": {
-      "outputDir": "../../test/wct-results.xml"
+      "outputDir": "../../test/"
     }
   },
   "suites": ["test/unit/*.test.html"]
