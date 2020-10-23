@@ -85,6 +85,7 @@
     "terser": "^5.3.4",
     "vl-ui-demo": "^1.2.3",
     "wct-browser-legacy": "^1.0.2",
+    "wct-junit": "git+https://github.com/jasongardnerlv/wct-junit.git",
     "wct-xunit-reporter": "^1.0.2",
     "web-component-tester": "^6.9.2",
     "yaml": "^1.10.0",
