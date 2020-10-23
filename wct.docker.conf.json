@@ -14,9 +14,9 @@
     "plugins": {
       "local": false,
       "sauce": false,    
-        "xunit-reporter": {
-            "output": "../../test/wct-results.xml"
-          }
+      "wct-junit": {
+          "outputDir": "../../test/wct/"
+        }
     },
     "suites": ["test/unit/*.test.html"],
     "webserver": {
