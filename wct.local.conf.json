@@ -1,14 +1,13 @@
 {
-    "expanded": true,
-    "npm": true,
-    "plugins": {
-        "local": {
-            "browsers": ["chrome", "firefox"]
-        },    
-        "xunit-reporter": {
-            "output": "../../test/wct-results.xml"
-          }
+  "expanded": true,
+  "npm": true,
+  "plugins": {
+    "local": {
+      "browsers": ["chrome", "firefox"]
     },
-    "suites": ["test/unit/*.test.html"]
-  }
-  
+    "wct-junit": {
+      "outputDir": "../../test/wct-results.xml"
+    }
+  },
+  "suites": ["test/unit/*.test.html"]
+}
