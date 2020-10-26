@@ -1,8 +1,8 @@
 module.exports = {
     "full-trace": true,
-    "reporter": "mocha-junit-reporter",
+    "reporter": "mocha-multi-reporters",
     "reporterOptions": {
-        "mochaFile": '../../test/e2e.xml'
+        "configFile": 'reporter-config.json'
     },
     "spec": ["../../test/**/*.test.js"],
     "timeout": '10000'
