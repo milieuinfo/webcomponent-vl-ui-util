@@ -1,6 +1,6 @@
 {
-    "reporterEnabled": "mocha-junit-reporter,spec",
+    "reporterEnabled": "tap,mocha-junit-reporter,spec",
     "mochaJunitReporterReporterOptions": {
-        "mochaFile": "./test/unit-results.xml"
+        "mochaFile": "./test/e2e-results.xml"
     }
 }
