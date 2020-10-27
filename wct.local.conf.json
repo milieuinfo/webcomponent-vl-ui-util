@@ -5,9 +5,9 @@
         "local": {
             "browsers": ["chrome", "firefox"]
         },
-        "scripts/junit-reporter": {
+        "junit-reporter": {
             "output": {
-                "path": "../../test/",
+                "path": "../test/",
                 "name": "wct-results.xml"
           }
         }
