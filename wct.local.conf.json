@@ -7,7 +7,7 @@
         },
         "junit-reporter": {
             "output": {
-                "path": "../test/",
+                "path": "../../test/",
                 "name": "wct-results.xml"
           }
         }
