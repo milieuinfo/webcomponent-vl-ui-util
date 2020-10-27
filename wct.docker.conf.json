@@ -14,7 +14,7 @@
   "plugins": {
     "local": false,
     "sauce": false,
-    "junit-reporter": {
+    "scripts/junit-reporter": {
       "output": {
         "path": "../../test/",
         "name": "wct-results.xml"
