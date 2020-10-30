@@ -91,6 +91,7 @@
     "yargs": "^16.0.3"
   },
   "devDependencies": {
+    "mock-require": "^3.0.3",
     "octonode": "^0.9.5"
   }
 }
