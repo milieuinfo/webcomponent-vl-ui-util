@@ -22,7 +22,4 @@
     }
   },
   "suites": ["test/unit/*.test.html"],
-  "webserver": {
-    "hostname": "tests"
-  }
 }
