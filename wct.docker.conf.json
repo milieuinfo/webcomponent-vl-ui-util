@@ -21,5 +21,8 @@
       }
     }
   },
-  "suites": ["test/unit/*.test.html"]
+  "suites": ["test/unit/*.test.html"],
+  "webserver": {
+    "hostname": "tests"
+  }
 }
