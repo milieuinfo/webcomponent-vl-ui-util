@@ -16,12 +16,12 @@ const mockPackage = {
 };
 
 describe('checkDependencies script', () => {
-  it('Indien het versienummer niet voldoet aan de regex zal er de error-counter verhogen', () => {
+  it('indien het versienummer niet voldoet aan de regex zal er de error-counter verhogen', () => {
     const errors = new Dependencies().testVersionNumbersAgainstRegex(mockPackage.dependencies);
     assert.isTrue(errors === 4 );
   });
 
-  it('Indien er dependencies niet voldoen aan de regex zal de exit code op 1 gezet worden', () => {
+  it('indien er dependencies niet voldoen aan de regex zal de exit code op 1 gezet worden', () => {
     const dependencies = new Dependencies();
     const errors = dependencies.testVersionNumbersAgainstRegex(mockPackage.dependencies);
     expect(() => dependencies.processErrors(errors)).to.throw('Een of meerdere dependencies verwijzen naar een branch!');
