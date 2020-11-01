@@ -61,7 +61,7 @@
     "browserstack-local": "^1.4.8",
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
-    "chromedriver": "^85.0.1",
+    "chromedriver": "^86.0.0",
     "eslint": "^7.10.0",
     "eslint-config-google": "^0.14.0",
     "eslint-plugin-html": "^6.1.0",
