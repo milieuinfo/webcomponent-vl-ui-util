@@ -18,5 +18,5 @@ specPlan.set('key', planKey);
 specPlan.set('name', planName);
 permissionPlan.set('key', `WEBCO-${planKey}`);
 
-let result = utils.mergeDocuments(doc);
+const result = utils.mergeDocuments(doc);
 utils.writeYaml(result, path.join(__dirname, '../../../bamboo-specs/bamboo.yml'));
