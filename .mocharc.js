@@ -5,5 +5,5 @@ module.exports = {
         "configFile": 'reporter-config.json'
     },
     "spec": ["../../test/**/*.test.js"],
-    "timeout": '10000'
+    "timeout": '300000'
 };
