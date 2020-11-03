@@ -49,10 +49,9 @@
     "test:component:grid": "npm run test:component:unit:grid && npm run test:component:e2e:grid",
     "test:component:unit": "wct --config-file ./../../wct.local.conf.json",
     "test:component:unit:grid": "wct --config-file ./../../wct.docker.conf.json",
-    "test:component:e2e": "npm run test:component:server:start && mocha --chrome && mocha --firefox && mocha --edge",
+    "test:component:e2e": "npm run test:component:server:start && mocha --chrome && mocha --firefox",
     "test:component:e2e:local": "npm run test:component:server:start && mocha $npm_config_browser",
-    "test:component:e2e:grid": "npm run test:component:server:start && mocha --chrome --grid && mocha --firefox --grid && mocha --edge --grid",
-    "test:component:e2e:grid:local": "mocha $npm_config_browser --grid",
+    "test:component:e2e:browserstack": "npm run test:component:server:start && mocha --chrome --browserstack && mocha --firefox --browserstack && mocha --edge --browserstack",
     "posttest:component:e2e": "pkill -f http-server",
     "update:readme": "node ./scripts/updateReadme.js",
     "util": "npm run install:sass && npm run install:copy && npm run install:css:minify && npm run install:fonts && npm run install:bamboo && npm run install:copy:github && npm run update:readme && npm run format"
