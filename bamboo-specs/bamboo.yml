@@ -27,6 +27,8 @@ Build:
     - script: |
         #!/usr/bin/env bash
         set -e
+        export browserstack_username="${bamboo_browserstack_username}"
+        export browserstack_password="${bamboo_browserstack_password}"
         docker-compose up --force-recreate --exit-code-from tests
   final-tasks:
     - script:
