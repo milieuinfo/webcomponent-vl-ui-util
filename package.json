@@ -82,7 +82,7 @@
     "simple-git": "^2.20.1",
     "sinon": "^9.1.0",
     "terser": "^5.3.4",
-    "vl-ui-demo": "^1.2.3",
+    "vl-ui-demo": "^1.2.4",
     "wct-browser-legacy": "^1.0.2",
     "wct-junit-reporter": "^1.0.0",
     "web-component-tester": "^6.9.2",
