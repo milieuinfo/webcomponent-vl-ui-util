@@ -126,15 +126,15 @@ class WebComponentBuild {
   }
 
   __vervangLocalLibImportsDoorRelatieveImports(file) {
-    replaceInFile(`import ${quoted('/lib/(.*)')}`, `import 'vl-ui-${this.webcomponent}/lib/$1'`, file);
+    replaceInFile(`import ${quoted('/lib/(.*)')}`, `import '../lib/$1'`, file);
   }
 
   __vervangLocalVlSrcImportsDoorRelatieveImports(file) {
-    replaceInFile(`${quoted('/src/vl-(.*).js')}`, `'vl-ui-${this.webcomponent}/dist/vl-$1.src.js'`, file);
+    replaceInFile(`${quoted('/src/vl-(.*).js')}`, `'../dist/vl-$1.src.js'`, file);
   }
 
   __vervangLocalSrcImportsDoorRelatieveImports(file) {
-    replaceInFile(`from ${quoted('/src/(.*)')}`, `from 'vl-ui-${this.webcomponent}/src/$1'`, file);
+    replaceInFile(`from ${quoted('/src/(.*)')}`, `from '../src/$1'`, file);
   }
 
   __commit() {

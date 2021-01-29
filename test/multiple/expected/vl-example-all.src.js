@@ -1,7 +1,7 @@
 import {define, awaitScript} from 'vl-ui-core';
 
-import {VlExampleOne} from 'vl-ui-example/dist/vl-example.src.js';
-import {VlExampleOther} from 'vl-ui-example/dist/vl-example-other.src.js';
+import {VlExampleOne} from '../dist/vl-example.src.js';
+import {VlExampleOther} from '../dist/vl-example-other.src.js';
 
 Promise.all([
   awaitScript('vl-map-openlayers', 'dependency/script-from-dependency.js'),
