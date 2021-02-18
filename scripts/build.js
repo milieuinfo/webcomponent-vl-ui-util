@@ -122,7 +122,7 @@ class WebComponentBuild {
   }
 
   __vervangThirdPartyImportsDoorRelatieveImports(file) {
-    replaceInFile(`${quoted('/node_modules/(.+\\.js)')}`, `'$1'`, file);
+    replaceInFile(`(import.*?|from.*?)${quoted('/node_modules/(.+\\.js)')}`, `$1'$2'`, file);
   }
 
   __vervangLocalLibImportsDoorRelatieveImports(file) {
