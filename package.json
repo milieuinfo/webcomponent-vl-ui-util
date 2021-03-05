@@ -56,6 +56,7 @@
     "util": "npm run install:sass && npm run install:copy && npm run install:css:minify && npm run install:fonts && npm run install:bamboo && npm run install:copy:github && npm run update:readme && npm run format"
   },
   "dependencies": {
+    "axe-webdriverjs": "^2.3.0",
     "browserstack-local": "^1.4.8",
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
