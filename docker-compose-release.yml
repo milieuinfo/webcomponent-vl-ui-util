@@ -2,6 +2,7 @@ version: "3"
 services:
   release:
     image: ${DOCKER_REGISTRY}milieuinfo/wc-release:1.0.2
+    user: ${bamboo_BAMBOO_UID}:${bamboo_BAMBOO_GID}
     environment:
       - http_proxy=${http_proxy}
       - https_proxy=${https_proxy}

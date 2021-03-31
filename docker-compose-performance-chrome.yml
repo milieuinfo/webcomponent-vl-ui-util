@@ -2,6 +2,7 @@ version: "3"
 services:
   sitespeed-chrome:
     image: ${DOCKER_REGISTRY}sitespeedio/sitespeed.io
+    user: ${bamboo_BAMBOO_UID}:${bamboo_BAMBOO_GID}
     command: "--config ./config/config-chrome.json --preScript ./scripts/preScript.js http://demo.app.io:8080/demo/performance.html"
     environment:
       - http_proxy=${http_proxy}
@@ -17,6 +18,7 @@ services:
       - ./performance/results/chrome/:/sitespeed.io/chrome-results/
   demo.app.io:
     image: ${DOCKER_REGISTRY}milieuinfo/node:12
+    user: ${bamboo_BAMBOO_UID}:${bamboo_BAMBOO_GID}
     container_name: demo.app.io
     hostname: demo.app.io
     working_dir: /home/node/app

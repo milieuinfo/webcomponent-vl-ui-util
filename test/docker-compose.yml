@@ -2,12 +2,14 @@ version: "3"
 services:
   selenium-hub:
     image: ${DOCKER_REGISTRY}selenium/hub:3.141.59
+    user: ${bamboo_BAMBOO_UID}:${bamboo_BAMBOO_GID}
     container_name: selenium-hub
     environment: 
       - NODE_MAX_SESSION=3
       - NODE_MAX_INSTANCES=3
   selenium-chrome:
     image: ${DOCKER_REGISTRY}selenium/node-chrome-debug:3.141.59
+    user: ${bamboo_BAMBOO_UID}:${bamboo_BAMBOO_GID}
     depends_on:
       - selenium-hub
     environment:
@@ -19,6 +21,7 @@ services:
     shm_size: 2g
   selenium-firefox:
     image: ${DOCKER_REGISTRY}selenium/node-firefox-debug:3.141.59
+    user: ${bamboo_BAMBOO_UID}:${bamboo_BAMBOO_GID}
     depends_on:
       - selenium-hub
     environment:
@@ -30,6 +33,7 @@ services:
     shm_size: 2g
   tests:
     image: ${DOCKER_REGISTRY}milieuinfo/ubuntu-node:14
+    user: ${bamboo_BAMBOO_UID}:${bamboo_BAMBOO_GID}
     command: bash -c "npm install && npm run test:grid"
     depends_on:
       - selenium-hub
