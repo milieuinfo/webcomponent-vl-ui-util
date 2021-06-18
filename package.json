@@ -93,6 +93,7 @@
     "yargs": "^16.0.3"
   },
   "devDependencies": {
+    "eslint-config-prettier": "^8.3.0",
     "mock-require": "^3.0.3",
     "octonode": "^0.10.0"
   }
