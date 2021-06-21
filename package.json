@@ -66,6 +66,7 @@
     "eslint-config-google": "^0.14.0",
     "eslint-plugin-html": "^6.1.2",
     "eslint-plugin-only-warn": "^1.0.2",
+    "eslint-config-prettier": "^8.3.0",
     "event-stream": "^4.0.1",
     "fetch-mock": "^9.10.7",
     "geckodriver": "^1.20.0",
@@ -93,7 +94,6 @@
     "yargs": "^16.0.3"
   },
   "devDependencies": {
-    "eslint-config-prettier": "^8.3.0",
     "mock-require": "^3.0.3",
     "octonode": "^0.10.0"
   }
