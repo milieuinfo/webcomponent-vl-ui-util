@@ -95,13 +95,6 @@
     "yargs": "^16.0.3"
   },
   "devDependencies": {
-    "@babel/core": "^7.14.6",
-    "@storybook/addon-actions": "^6.3.2",
-    "@storybook/addon-essentials": "^6.3.2",
-    "@storybook/addon-links": "^6.3.2",
-    "@storybook/web-components": "^6.3.2",
-    "babel-loader": "^8.2.2",
-    "lit-html": "^1.4.1",
     "mock-require": "^3.0.3",
     "octonode": "^0.10.0"
   }
