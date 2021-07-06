@@ -24,7 +24,7 @@
     "install:copy:codeowner": "cp CODEOWNERS ../../",
     "install:copy:eslint": "cp .eslintrc.json ../../",
     "install:copy:prettier": "cp .prettierrc.json ../../",
-    "install:copy:storybook": "cp .storybook/. ../../.storybook/",
+    "install:copy:storybook": "cp -r .storybook ../../",
     "install:copy:github": "cp -r .github ../../",
     "install:copy:npmignore": "cp ./templates/npmignore.template ../../ && mv ../../npmignore.template ../../.npmignore",
     "install:copy:gitignore": "cp ./templates/gitignore.template ../../ && mv ../../gitignore.template ../../.gitignore",
