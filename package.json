@@ -20,10 +20,11 @@
     "explode": "node scripts/exploder.js",
     "format": "eslint ./../../ --ext .js --ext .html -c .eslintrc.json",
     "install:bamboo": "node ./bamboo/bamboo-spec.js",
-    "install:copy": "npm run install:copy:test && npm run install:copy:release && npm run install:copy:codeowner && npm run install:copy:github && npm run install:copy:wct && npm run install:copy:npmignore && npm run install:copy:gitignore && npm run install:copy:dockerignore && npm run install:copy:eslint && npm run install:copy:prettier",
+    "install:copy": "npm run install:copy:test && npm run install:copy:release && npm run install:copy:codeowner && npm run install:copy:github && npm run install:copy:wct && npm run install:copy:npmignore && npm run install:copy:gitignore && npm run install:copy:dockerignore && npm run install:copy:eslint && npm run install:copy:prettier && npm run install:copy:storybook",
     "install:copy:codeowner": "cp CODEOWNERS ../../",
     "install:copy:eslint": "cp .eslintrc.json ../../",
     "install:copy:prettier": "cp .prettierrc.json ../../",
+    "install:copy:storybook": "cp .storybook ../../",
     "install:copy:github": "cp -r .github ../../",
     "install:copy:npmignore": "cp ./templates/npmignore.template ../../ && mv ../../npmignore.template ../../.npmignore",
     "install:copy:gitignore": "cp ./templates/gitignore.template ../../ && mv ../../gitignore.template ../../.gitignore",
@@ -94,6 +95,13 @@
     "yargs": "^16.0.3"
   },
   "devDependencies": {
+    "@babel/core": "^7.14.6",
+    "@storybook/addon-actions": "^6.3.2",
+    "@storybook/addon-essentials": "^6.3.2",
+    "@storybook/addon-links": "^6.3.2",
+    "@storybook/web-components": "^6.3.2",
+    "babel-loader": "^8.2.2",
+    "lit-html": "^1.4.1",
     "mock-require": "^3.0.3",
     "octonode": "^0.10.0"
   }
