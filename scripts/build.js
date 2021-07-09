@@ -35,13 +35,13 @@ class WebComponentBuild {
 
   __cleanDistFolder() {
     if (fs.existsSync(this.distFolder)) {
-      fs.rmdirSync(this.distFolder, {recursive: true});
+      fs.rmdirSync(this.distFolder, { recursive: true });
     }
     fs.mkdirSync(this.distFolder);
   }
 
   __copyNonVlSrcToDist() {
-    copyFilesTo(this.srcFolder, this.distFolder, (file) => !file.startsWith('vl-'));
+    // copyFilesTo(this.srcFolder, this.distFolder, (file) => !file.startsWith('vl-'));
   }
 
   async __build(file) {
@@ -110,7 +110,11 @@ class WebComponentBuild {
   }
 
   __vervangWebcomponentenImportsDoorMinifiedImports(file) {
-    replaceInFile(`${quoted('/node_modules/vl-ui-(.*)/dist/vl-(.*).js')}`, `'/node_modules/vl-ui-$1/dist/vl-$2.min.js'`, file);
+    replaceInFile(
+      `${quoted('/node_modules/vl-ui-(.*)/dist/vl-(.*).js')}`,
+      `'/node_modules/vl-ui-$1/dist/vl-$2.min.js'`,
+      file,
+    );
   }
 
   __vervangGovFlandersImportsDoorMinifiedImports(file) {
@@ -148,7 +152,7 @@ class WebComponentBuild {
 }
 
 function executeCommand(script) {
-  execSync(script, {stdio: 'inherit'});
+  execSync(script, { stdio: 'inherit' });
 }
 
 function replaceInFile(search, replacement, file) {
