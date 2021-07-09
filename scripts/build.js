@@ -41,7 +41,7 @@ class WebComponentBuild {
   }
 
   __copyNonVlSrcToDist() {
-    // copyFilesTo(this.srcFolder, this.distFolder, (file) => !file.startsWith('vl-'));
+    copyFilesTo(this.srcFolder, this.distFolder, (file) => !file.startsWith('vl-'));
   }
 
   async __build(file) {
@@ -178,7 +178,7 @@ function copyToFolder(srcFile, destFolder) {
 
 function copyFilesTo(srcFolder, destFolder, predicate) {
   fs.readdirSync(srcFolder).forEach((file) => {
-    if (!predicate || predicate(file)) {
+    if ((!predicate || predicate(file)) && fs.stat(file, (error, stats) => !stats.isDirectory())) {
       const srcFile = path.resolve(srcFolder, file);
       copyToFolder(srcFile, destFolder);
     }
