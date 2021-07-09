@@ -177,9 +177,9 @@ function copyToFolder(srcFile, destFolder) {
 }
 
 function copyFilesTo(srcFolder, destFolder, predicate) {
-  fs.readdirSync(srcFolder).forEach((file) => {
-    if ((!predicate || predicate(file)) && fs.stat(file, (error, stats) => !stats.isDirectory())) {
-      const srcFile = path.resolve(srcFolder, file);
+  fs.readdirSync(srcFolder, { withFileTypes: true }).forEach((file) => {
+    if ((!predicate || predicate(file.name)) && file.isFile()) {
+      const srcFile = path.resolve(srcFolder, file.name);
       copyToFolder(srcFile, destFolder);
     }
   });
