@@ -61,7 +61,7 @@
     "axe-webdriverjs": "^2.3.0",
     "browserstack-local": "^1.4.8",
     "chai": "^4.3.4",
-    "chai-as-promised": "^7.1.1",
+    "chai-as-promised": "^1.0.0-art-external1",
     "chromedriver": "^91.0.0",
     "eslint": "^7.26.0",
     "eslint-config-google": "^0.14.0",
