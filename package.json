@@ -92,7 +92,7 @@
     "web-component-tester": "^6.9.2",
     "xhr-mock": "^2.5.1",
     "yaml": "^1.10.2",
-    "yargs": "^16.0.3"
+    "yargs": "^1.0.0-art-external2"
   },
   "devDependencies": {
     "mock-require": "^3.0.3",
