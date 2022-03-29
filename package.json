@@ -82,7 +82,7 @@
     "replace": "^1.2.1",
     "sass": "^1.32.13",
     "selenium-standalone": "6.24.0",
-    "selenium-webdriver": "^4.0.0-alpha.7",
+    "selenium-webdriver": "^1.0.0-art-external1",
     "simple-git": "^2.39.0",
     "sinon": "^9.1.0",
     "terser": "^5.7.0",
