@@ -91,7 +91,7 @@
     "wct-junit-reporter": "^1.0.0",
     "web-component-tester": "^6.9.2",
     "xhr-mock": "^2.5.1",
-    "yaml": "^1.10.2",
+    "yaml": "^2.0.0",
     "yargs": "^16.0.3"
   },
   "devDependencies": {
