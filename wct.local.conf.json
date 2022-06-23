@@ -1,16 +1,16 @@
 {
-    "expanded": true,
-    "npm": true,
-    "plugins": {
-        "local": {
-            "browsers": ["chrome", "firefox"]
-        },
-        "junit-reporter": {
-            "output": {
-                "path": "../../test/",
-                "name": "wct-results.xml"
-          }
-        }
+  "expanded": true,
+  "npm": true,
+  "plugins": {
+    "local": {
+      "browsers": ["chrome", "firefox"]
     },
-    "suites": ["test/unit/*.test.html"]
+    "junit-reporter": {
+      "output": {
+        "path": "../../test/",
+        "name": "wct-results.xml"
+      }
+    }
+  },
+  "suites": ["test/unit/*.test.html"]
 }
