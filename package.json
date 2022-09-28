@@ -72,7 +72,7 @@
     "fetch-mock": "^9.10.7",
     "geckodriver": "^1.20.0",
     "http-server": "^0.13.0",
-    "jsdom": "^16.5.3",
+    "jsdom": "^20.0.0",
     "luxon": "^1.27.0",
     "minify": "^5.1.1",
     "mocha": "^8.4.0",
