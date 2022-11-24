@@ -65,7 +65,7 @@
     "chromedriver": "^91.0.0",
     "eslint": "^7.26.0",
     "eslint-config-google": "^0.14.0",
-    "eslint-plugin-html": "^6.1.2",
+    "eslint-plugin-html": "^7.0.0",
     "eslint-plugin-only-warn": "^1.0.2",
     "eslint-config-prettier": "^8.3.0",
     "event-stream": "^4.0.1",
